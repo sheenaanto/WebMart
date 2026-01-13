@@ -1,0 +1,57 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <!-- Banner section -->
+    <section class="section-intro py-3">
+      <div class="container">
+        <div class="intro-banner-wrap">
+          <img
+            src="{% static 'images/banners/cover.jpg' %}"
+            class="img-fluid rounded w-100"
+            alt="Intro Banner"
+          />
+        </div>
+      </div>
+    </section>   
+
+    <main>   
+
+      <section class="section-name py-4">
+        <div class="container">
+          <!-- Section Header -->
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3 class="section-title mb-0">Popular products</h3>
+            <a href="" class="btn btn-outline-primary">See all</a>
+          </div>
+
+          <!-- Product Grid -->
+          <div class="row g-4">
+            <!-- Product Card -->
+          {% for product in products %}
+            <div class="col-md-3">
+              <div class="card card-product-grid">
+                <a href="{{ product.get_url }}" class="img-wrap">
+                  <img
+                    src="{{ product.images.url }}"
+                    class="img-fluid"
+                    alt="{{ product.product_name }}"
+                  />
+                </a>
+                <div class="info-wrap p-2">
+                  <a href="{{ product.get_url }}" class="title"
+                    >{{ product.product_name }}</a
+                  >
+                  <div class="price mt-1">${{ product.price }}</div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+       
+          </div>
+        </div>
+      </section>      
+    </main>    
+  </body>
+</html>
+{% endblock %}

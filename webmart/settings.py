@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'cloudinary',
     'django.contrib.sites',
+    'category',
+    'accounts'
 
 ]
 
@@ -84,6 +86,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'webmart.wsgi.application'
 
+AUTH_USER_MODEL = 'accounts.Account'
+
+SITE_ID = 1
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

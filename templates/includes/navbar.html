@@ -64,11 +64,15 @@
 
           <ul class="dropdown-menu w-100">
             <li>
-              <a class="dropdown-item" href="">All</a>
+              <a class="dropdown-item" href="{% url 'store' %}">
+                All Products</a
+              >
             </li>
             {% for category in links %}
             <li>
-              <a class="dropdown-item" href="">{{ category.category_name }}</a>
+              <a class="dropdown-item" href="{{ category.get_url }}"
+                >{{ category.category_name }}</a
+              >
             </li>
             {% endfor %}
           </ul>

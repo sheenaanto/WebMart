@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'cloudinary',
     'django.contrib.sites',
     'category',
-    'accounts'
+    'accounts',
+    'store',
 
 ]
 

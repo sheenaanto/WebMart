@@ -8,23 +8,22 @@ from django.core.paginator import Paginator
 
 
 def store(request, category_slug=None):
+    selected_category = None
+    products = None
     if category_slug:
         selected_category = get_object_or_404(Category, slug=category_slug)
         products = Product.objects.filter(
             category=selected_category, is_available=True)
-        # pagination code
-        products = Product.objects.all().filter(is_available=True)
-        paginator = Paginator(products, 6)
-        page = request.GET.get('page')
-        products_count = products.count()
+
     else:
         products = Product.objects.all().filter(is_available=True)
-        # pagination code
-        paginator = Paginator(products, 6)
-        page = request.GET.get('page')
-        paged_products = paginator.get_page(page)
 
-        products_count = products.count()
+    # pagination code
+    paginator = Paginator(products, 6)
+    page = request.GET.get('page')
+    products_count = products.count()
+    paged_products = paginator.get_page(page)
+
     context = {
         'products': paged_products,
         'products_count': products_count,

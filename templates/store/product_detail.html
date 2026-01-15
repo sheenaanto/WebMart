@@ -1,7 +1,6 @@
 {% extends "base.html" %}{% load static %} {% block content %}
 <section class="section-content padding-y bg">
   <div class="container">
-    <!-- ============================ COMPONENT 1 ================================= -->
     <form method="POST" action="{% url 'add_cart' single_product.id %}">
       {% csrf_token %}
       <div class="card">
@@ -11,9 +10,7 @@
               <div class="img-big-wrap">
                 <a href="#"><img src="{{ single_product.images.url }}" /></a>
               </div>
-              <!-- img-big-wrap.// -->
             </article>
-            <!-- gallery-wrap .end// -->
           </aside>
           <main class="col-md-6 border-left">
             <article class="content-body">
@@ -26,50 +23,19 @@
               <p>{{single_product.description}}</p>
 
               <hr />
-              <div class="row w-50">
-                <div class="item-option-select dropdown">
-                  <h6>Choose Color</h6>
-                  <select name="color" class="form-control">
-                    <option value="" disabled selected>Select</option>
-                    {%for i in single_product.variation_set.colors %}
-                    <option value="{{i.variation_value}}">
-                      {{i.variation_value}}
-                    </option>
-                    {%endfor%}
-                  </select>
-                </div>
-              </div>
-              <!-- row.// -->
-              <div class="row w-50">
-                <div class="item-option-select">
-                  <h6>Select Size</h6>
-                  <select name="size" class="form-control">
-                    <option value="" disabled selected>Select</option>
-                    {%for i in single_product.variation_set.sizes %}
-                    <option value="{{i.variation_value}}">
-                      {{i.variation_value}}
-                    </option>
-                    {%endfor%}
-                  </select>
-                </div>
-              </div>
-              <!-- row.// -->
+
               <hr />
               {% if single_product.stock <= 0 %}
               <h3 class="text-danger">Out of Stock</h3>
               {% else %}
-              <button type="submit" class="btn btn-primary">
-                <span class="text">Add to cart</span>
-                <i class="fas fa-shopping-cart"></i>
-              </button>
-              {% endif %}
-              <!-- {% if single_product.stock <= 0 %}
-              <h3 class="text-danger">Out of Stock</h3>
-              {% else %} {% if in_cart %}
+              <!-- {% if single_product.stock <= 0 %} -->
+              <!-- <h3 class="text-danger">Out of Stock</h3> -->
+              <!-- {% else %}  -->
+              {% if in_cart %}
               <a href="#" class="btn btn-success"
                 >Added to Cart <i class="fas fa-check"></i
               ></a>
-              <a href="{% url 'carts' %}" class="btn btn-primary"
+              <a href="{% url 'storecart' %}" class="btn btn-outline-primary"
                 >Go to Cart <i class="fas fa-eye"></i
               ></a>
               {% else %}
@@ -77,7 +43,10 @@
                 <span class="text">Add to cart</span>
                 <i class="fas fa-shopping-cart"></i>
               </button>
-              {% endif %} {% endif %} -->
+              {% endif %}
+              <!-- img-big-wrap.// -->
+              {% endif %}
+              <!-- {% endif %} -->
             </article>
             <!-- product-info-aside .// -->
           </main>
@@ -86,43 +55,7 @@
         <!-- row.// -->
       </div>
     </form>
-    <!-- card.// -->
-    <!-- ============================ COMPONENT 1 END .// ================================= -->
-
     <br />
-
-    <div class="row">
-      <div class="col-md-9">
-        <header class="section-heading">
-          <h3>Customer Reviews</h3>
-        </header>
-
-        <article class="box mb-3">
-          <div class="icontext w-100">
-            <img
-              src="{% static './images/avatars/avatar1.jpg' %}"
-              class="img-xs icon rounded-circle"
-            />
-            <div class="text">
-              <span class="date text-muted float-md-right">24.04.2020 </span>
-              <h6 class="mb-1">Mike John</h6>
-            </div>
-          </div>
-          <!-- icontext.// -->
-          <div class="mt-3">
-            <p>
-              Dummy comment Lorem ipsum dolor sit amet, consectetur adipisicing
-              elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-              laboris nisi ut aliquip
-            </p>
-          </div>
-        </article>
-      </div>
-      <!-- col.// -->
-    </div>
-    <!-- row.// -->
   </div>
-  <!-- container .//  -->
 </section>
 {% endblock %}

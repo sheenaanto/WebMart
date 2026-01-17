@@ -107,6 +107,7 @@
       <div class="col-lg-3 col-sm-6 col-8 mt-3 mt-lg-0">
         <div class="d-flex justify-content-end align-items-center">
           <!-- User Info -->
+          {% if user.id is None %}
           <div class="me-3 text-end">
             <small class="text-muted">Welcome Guest!</small>
             <div>
@@ -114,7 +115,15 @@
               <a href="{% url 'register' %}">Register</a>
             </div>
           </div>
-
+          {% else %}
+          <div class="me-3 text-end">
+            <small class="text-muted">Welcome {{ user.first_name }}!</small>
+            <div>
+              <a href="">Dashboard</a> |
+              <a href="{% url 'logout' %}">Logout</a>
+            </div>
+          </div>
+          {% endif %}
           <!-- Cart Icon -->
           <a href="{% url 'storecart' %}" class="position-relative">
             <div class="icon icon-sm rounded-circle border p-2">

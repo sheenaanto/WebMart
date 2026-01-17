@@ -1,0 +1,62 @@
+{% extends "base.html" %} {% block content %}
+
+<section class="section-content padding-y">
+  <div class="card mx-auto" style="max-width: 520px; margin-top: 40px">
+    <article class="card-body">
+      {% include "includes/alerts.html" %}
+      <header class="mb-4"><h4 class="card-title">Sign up</h4></header>
+
+      <form method="post" action="{% url 'register'%}">
+        {% csrf_token %}
+        <!-- {{ form.as_p }} -->
+        <div class="row">
+          <div class="col form-group">
+            <label>First name</label>
+            {{ form.first_name }}
+          </div>
+
+          <div class="col form-group">
+            <label>Last name</label>
+            {{ form.last_name }}
+          </div>
+        </div>
+
+        <div class="form-group mt-3">
+          <label>Email</label>
+          {{ form.email }}
+        </div>
+
+        <div class="row mt-3">
+          <div class="form-group col-md-6">
+            <label>Phone number</label>
+            {{ form.phone_number }}
+          </div>
+
+        
+
+        <div class="row mt-3">
+          <div class="form-group col-md-6">
+            <label>Create password</label>
+            {{ form.password }}
+          </div>
+
+          <div class="form-group col-md-6">
+            <label>Repeat password</label>
+            {{ form.confirm_password }}
+          </div>
+        </div>
+
+        <div class="form-group mt-4 d-grid">
+          <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+        {{ form.email.errors }}
+        {{ form.non_field_errors }}
+      </form>
+    </article>
+  </div>
+
+  <p class="text-center mt-4">Have an account? <a href="">Log In</a></p>
+  <br /><br />
+</section>
+
+{% endblock %}

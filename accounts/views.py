@@ -43,16 +43,24 @@ def login(request):
 
         if user:
             try:
+                # guest cart
                 cart = Cart.objects.get(cart_id=_cart_id(request))
-                is_cart_items = CartItem.objects.filter(cart=cart).exists()
-                if is_cart_items:
-                    cart_items = CartItem.objects.filter(cart=cart)
-
-                    for item in cart_items:
+                cart_items = CartItem.objects.filter(cart=cart)
+                for item in cart_items:
+                    # Check if user already has this product in cart
+                    try:
+                        existing_item = CartItem.objects.get(
+                            product=item.product, user=user)
+                        existing_item.quantity += item.quantity
+                        existing_item.save()
+                        item.delete()
+                    except CartItem.DoesNotExist:
                         item.user = user
+                        item.cart = None
                         item.save()
-            except:
+            except Cart.DoesNotExist:
                 pass
+
             auth.login(request, user)
             return redirect('home')
         else:

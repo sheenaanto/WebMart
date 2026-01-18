@@ -55,7 +55,7 @@
                     <div class="input-group input-spinner">
                       <div class="input-group-prepend">
                         <a
-                          href="{% url 'remove_cart' cart_item.product.id%}"
+                          href="{% url 'remove_cart' cart_item.product.id cart_item.id %}"
                           class="btn btn-light"
                           type="button"
                           id="button-plus"
@@ -70,7 +70,7 @@
                       />
                       <div class="input-group-append">
                         <a
-                          href="{% url 'add_cart'  cart_item.product.id %}"
+                          href="{% url 'add_cart'  cart_item.product.id  %}"
                           class="btn btn-light"
                           type="button"
                           id="button-minus"
@@ -94,7 +94,7 @@
                 </td>
                 <td class="text-right">
                   <a
-                    href="{% url 'remove_cart_item' cart_item.product.id %}"
+                    href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}"
                     class="btn btn-danger"
                   >
                     Remove</a

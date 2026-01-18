@@ -62,7 +62,8 @@ def login(request):
                 pass
 
             auth.login(request, user)
-            return redirect('home')
+            messages.success(request, "You are now logged in.")
+            return redirect('dashboard')
         else:
             messages.error(request, "Invalid login credentials")
             return redirect('login')
@@ -70,8 +71,13 @@ def login(request):
     return render(request, 'accounts/login.html')
 
 
-@login_required
+@login_required(login_url='login')
 def logout(request):
     auth.logout(request)
     messages.success(request, "You have been logged out.")
     return redirect('login')
+
+
+@login_required(login_url='login')
+def dashboard(request):
+    return render(request, 'accounts/dashboard.html')

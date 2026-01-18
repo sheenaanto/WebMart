@@ -34,7 +34,7 @@
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="fa fa-phone"></i> 0634712345</a
+            <i class="fa fa-phone"></i> +44 123456789</a
           >
         </li>
       </ul>
@@ -121,7 +121,7 @@
               >Welcome {{ user.first_name |capfirst}}!</small
             >
             <div>
-              <a href="">Dashboard</a> |
+              <a href="{% url 'dashboard' %}">Dashboard</a> |
               <a href="{% url 'logout' %}">Logout</a>
             </div>
           </div>

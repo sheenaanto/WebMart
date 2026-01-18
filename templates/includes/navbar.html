@@ -117,7 +117,9 @@
           </div>
           {% else %}
           <div class="me-3 text-end">
-            <small class="text-muted">Welcome {{ user.first_name }}!</small>
+            <small class="text-muted"
+              >Welcome {{ user.first_name |capfirst}}!</small
+            >
             <div>
               <a href="">Dashboard</a> |
               <a href="{% url 'logout' %}">Logout</a>

@@ -3,6 +3,9 @@ from django.shortcuts import redirect, render
 from accounts.forms import RegistrationForm
 from accounts.models import Account
 from django.contrib.auth.decorators import login_required
+
+from carts.models import Cart, CartItem
+from carts.views import _cart_id
 # Create your views here.
 
 
@@ -37,7 +40,19 @@ def login(request):
         email = request.POST['email']
         password = request.POST['password']
         user = auth.authenticate(email=email, password=password)
+
         if user:
+            try:
+                cart = Cart.objects.get(cart_id=_cart_id(request))
+                is_cart_items = CartItem.objects.filter(cart=cart).exists()
+                if is_cart_items:
+                    cart_items = CartItem.objects.filter(cart=cart)
+
+                    for item in cart_items:
+                        item.user = user
+                        item.save()
+            except:
+                pass
             auth.login(request, user)
             return redirect('home')
         else:

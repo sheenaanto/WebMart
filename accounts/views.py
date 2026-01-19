@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from carts.models import Cart, CartItem
 from carts.views import _cart_id
+from orders.models import Order
 # Create your views here.
 
 
@@ -63,7 +64,7 @@ def login(request):
 
             auth.login(request, user)
             messages.success(request, "You are now logged in.")
-            return redirect('dashboard')
+            return redirect('home')
         else:
             messages.error(request, "Invalid login credentials")
             return redirect('login')
@@ -80,4 +81,12 @@ def logout(request):
 
 @login_required(login_url='login')
 def dashboard(request):
-    return render(request, 'accounts/dashboard.html')
+    orders = Order.objects.order_by('-created_on').filter(
+        user_id=request.user.id, is_ordered=True)
+    order_count = orders.count()
+
+    context = {
+        'orders': orders,
+        'order_count': order_count,
+    }
+    return render(request, 'accounts/dashboard.html', context)

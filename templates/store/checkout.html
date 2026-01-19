@@ -2,14 +2,15 @@
 
 <section class="section-content py-4 bg-light">
   <div class="container">
-    <div class="row">
-      <!-- Billing Address -->
-      <aside class="col-lg-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="mb-3">Billing Address</h4>
+    <form action="{% url 'place_order' %}" method="POST">
+      {% csrf_token %}
+      <div class="row">
+        <!-- Billing Address -->
+        <aside class="col-lg-6 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="mb-3">Billing Address</h4>
 
-            <form action="">
               <div class="row g-3">
                 <div class="col">
                   <label class="form-label">First name</label>
@@ -113,93 +114,125 @@
                   placeholder="Notes about your order, e.g. special notes for delivery."
                 ></textarea>
               </div>
-            </form>
+            </div>
           </div>
-        </div>
-      </aside>
+        </aside>
 
-      <!-- Checkout Buttons -->
-      <aside class="col-lg-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <table class="table align-middle">
-              <thead class="text-muted border-bottom">
-                <tr class="small text-uppercase">
-                  <th scope="col">Item</th>
-                  <th scope="col" class="text-center" width="120">Qty</th>
-                  <th scope="col" class="text-end" width="120">Price</th>
-                </tr>
-              </thead>
+        <!-- Checkout Buttons -->
+        <aside class="col-lg-6 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <table class="table align-middle">
+                <thead class="text-muted border-bottom">
+                  <tr class="small text-uppercase">
+                    <th scope="col">Item</th>
+                    <th scope="col" class="text-center" width="120">Qty</th>
+                    <th scope="col" class="text-end" width="120">Price</th>
+                  </tr>
+                </thead>
 
-              <tbody>
-                {% for cart_item in cart_items %}
-                <tr>
-                  <!-- Product Image + Name -->
-                  <td class="d-flex align-items-center gap-3">
-                    <img
-                      src="{{ cart_item.product.images.url }}"
-                      class="rounded"
-                      style="width: 70px; height: 70px; object-fit: cover"
-                    />
-                    <div>
-                      <div class="fw-semibold">
-                        {{ cart_item.product.product_name }}
+                <tbody>
+                  {% for cart_item in cart_items %}
+                  <tr>
+                    <!-- Product Image + Name -->
+                    <td class="d-flex align-items-center gap-3">
+                      <img
+                        src="{{ cart_item.product.images.url }}"
+                        class="rounded"
+                        style="width: 70px; height: 70px; object-fit: cover"
+                      />
+                      <div>
+                        <div class="fw-semibold">
+                          {{ cart_item.product.product_name }}
+                        </div>
+                        <small class="text-muted"
+                          >£{{ cart_item.product.price }} each</small
+                        >
                       </div>
-                      <small class="text-muted"
-                        >£{{ cart_item.product.price }} each</small
-                      >
-                    </div>
-                  </td>
+                    </td>
 
-                  <!-- Quantity -->
-                  <td class="text-center">
-                    <span class="badge bg-secondary px-3 py-2">
-                      {{ cart_item.quantity }}
-                    </span>
-                  </td>
+                    <!-- Quantity -->
+                    <td class="text-center">
+                      <span class="badge bg-secondary px-3 py-2">
+                        {{ cart_item.quantity }}
+                      </span>
+                    </td>
 
-                  <!-- Price -->
-                  <td class="text-end">
-                    <div class="fw-bold fs-6">£{{ cart_item.sub_total }}</div>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
+                    <!-- Price -->
+                    <td class="text-end">
+                      <div class="fw-bold fs-6">£{{ cart_item.sub_total }}</div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
 
-            <!-- Totals Section -->
-            <dl class="row mb-2">
-              <dt class="col-9 text-end">Total price:</dt>
-              <dd class="col-3 text-end">£{{ total }}</dd>
-            </dl>
+              <!-- Totals Section -->
+              <dl class="row mb-2">
+                <dt class="col-9 text-end">Total price:</dt>
+                <dd class="col-3 text-end">£{{ total }}</dd>
+              </dl>
 
-            <dl class="row mb-2">
-              <dt class="col-9 text-end">Tax:</dt>
-              <dd class="col-3 text-end">£{{ tax }}</dd>
-            </dl>
+              <dl class="row mb-2">
+                <dt class="col-9 text-end">Tax:</dt>
+                <dd class="col-3 text-end">£{{ tax }}</dd>
+              </dl>
 
-            <dl class="row mb-0">
-              <dt class="col-9 text-end">Grand Total:</dt>
-              <dd class="col-3 text-end fw-bold fs-5">£{{ grand_total }}</dd>
-            </dl>
+              <dl class="row mb-0">
+                <dt class="col-9 text-end">Grand Total:</dt>
+                <dd class="col-3 text-end fw-bold fs-5">£{{ grand_total }}</dd>
+              </dl>
 
-            <div>
-              <a href="#" class="btn btn-primary w-100"> Place Order </a>
-            </div>
-            <br />
-            <div>
-              <a
-                href="{% url 'store' %}"
-                class="btn btn-outline-secondary w-100"
-              >
-                Continue Shopping
-              </a>
+              <div>
+                <button type="submit" class="btn btn-primary w-100">
+                  Place Order
+                </button>
+              </div>
+              <br />
+              <div>
+                <a
+                  href="{% url 'store' %}"
+                  class="btn btn-outline-secondary w-100"
+                >
+                  Continue Shopping
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </aside>
-    </div>
+        </aside>
+      </div>
+    </form>
   </div>
 </section>
+<div class="modal fade" id="orderSuccessModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title">Order Placed Successfully</h5>
+      </div>
+      <div class="modal-body">
+        <p>Your order has been placed successfully.</p>
+        <p><strong>Order Number:</strong> {{ order_number }}</p>
+      </div>
+      <div class="modal-footer">
+        <a href="{% url 'store' %}" class="btn btn-primary"
+          >Continue Shopping</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
 
-{% endblock %}
+{% if order_placed %}
+<script>
+  const modal = new bootstrap.Modal(
+    document.getElementById("orderSuccessModal")
+  )
+  modal.show()
+
+  // Redirect after 3 seconds
+  // setTimeout(function () {
+  //   window.location.href = "{% url 'home' %}"
+  // }, 5000)
+</script>
+{% endif %} {% endblock %}

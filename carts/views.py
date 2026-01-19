@@ -1,3 +1,4 @@
+from django.contrib import messages
 from urllib import request
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -65,6 +66,7 @@ def add_cart(request, product_id):
         cart_item.quantity += 1
 
     cart_item.save()
+    messages.success(request, "Item added to your cart")
     return redirect('storecart')
 
 

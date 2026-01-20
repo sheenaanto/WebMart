@@ -165,20 +165,25 @@
       <aside class="col-lg-3">
         <div class="card">
           <div class="card-body">
-            <dl class="dlist-align">
-              <dt>Total price:</dt>
-              <dd class="text-right">£{{ total }}</dd>
-            </dl>
-            <dl class="dlist-align">
-              <dt>Tax:</dt>
-              <dd class="text-right">£{{ tax }}</dd>
-            </dl>
-            <dl class="dlist-align">
-              <dt>Total:</dt>
-              <dd class="text-right text-dark b">
-                <strong>£{{ grand_total }}</strong>
-              </dd>
-            </dl>
+            <div class="summary-list">
+              <div class="d-flex justify-content-between mx-4">
+                <span>Total price :</span>
+                <span>£{{ total|floatformat:2 }}</span>
+              </div>
+
+              <div class="d-flex justify-content-between mx-4">
+                <span>Tax :</span>
+                <span>£{{ tax|floatformat:2 }}</span>
+              </div>
+
+              <div class="d-flex justify-content-between mx-4">
+                <span>Total :</span>
+                <span class="text-dark b"
+                  ><strong>£{{ grand_total|floatformat:2 }}</strong></span
+                >
+              </div>
+            </div>
+
             <hr />
             <p class="text-center mb-3">
               <img src="{% static 'images/misc/payments.png' %}" height="26" />

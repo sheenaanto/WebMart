@@ -1,57 +1,56 @@
+{% extends "base.html" %} {% load static %} {% block content %}
 
-{% extends "base.html" %}
-{% load static %}
-{% block content %}
-    <!-- Banner section -->
-    <section class="section-intro py-3">
-      <div class="container">
-        <div class="intro-banner-wrap">
-          <img
-            src="{% static 'images/banners/cover.jpg' %}"
-            class="img-fluid rounded w-100"
-            alt="Intro Banner"
-          />
-        </div>
+<!-- Banner section -->
+<section class="section-intro py-3">
+  <div class="container">
+    <div class="intro-banner-wrap">
+      <img
+        src="{% static 'images/banners/cover.jpg' %}"
+        class="img-fluid rounded w-100"
+        alt="Intro Banner"
+      />
+    </div>
+  </div>
+</section>
+
+<main>
+  <!-- Popular Products -->
+  <section class="section-name py-4">
+    <div class="container">
+      <!-- Section Header -->
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="section-title mb-0">Popular products</h3>
+        <a href="{% url 'store' %}" class="btn btn-outline-primary">See all</a>
       </div>
-    </section>   
 
-    <main>   
+      <!-- Product Grid -->
+      <div class="row g-4">
+        {% for product in products %}
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="card h-100 shadow-sm border-0">
+            <a href="{{ product.get_url }}" class="img-wrap">
+              <img
+                src="{{ product.images.url }}"
+                class="card-img-top"
+                alt="{{ product.product_name }}"
+              />
+            </a>
 
-      <section class="section-name py-4">
-        <div class="container">
-          <!-- Section Header -->
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h3 class="section-title mb-0">Popular products</h3>
-            <a href="{% url 'store' %}" class="btn btn-outline-primary">See all</a>
-          </div>
-
-          <!-- Product Grid -->
-          <div class="row g-4">
-            <!-- Product Card -->
-          {% for product in products %}
-            <div class="col-md-3">
-              <div class="card card-product-grid">
-                <a href="{{ product.get_url }}" class="img-wrap">
-                  <img
-                    src="{{ product.images.url }}"
-                    class="img-fluid"
-                    alt="{{ product.product_name }}"
-                  />
-                </a>
-                <div class="info-wrap p-2">
-                  <a href="{{ product.get_url }}" class="title"
-                    >{{ product.product_name }}</a
-                  >
-                  <div class="price mt-1">£{{ product.price }}</div>
-                </div>
-              </div>
+            <div class="card-body p-2">
+              <a
+                href="{{ product.get_url }}"
+                class="card-title d-block text-truncate fw-semibold"
+              >
+                {{ product.product_name }}
+              </a>
+              <p class="card-text mt-1 mb-0 fw-bold">£{{ product.price }}</p>
             </div>
-          {% endfor %}
-       
           </div>
         </div>
-      </section>      
-    </main>    
-  </body>
-</html>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</main>
+
 {% endblock %}

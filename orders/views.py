@@ -71,9 +71,20 @@ def place_order(request, total=0, quantity=0):
                 product.stock -= item.quantity
                 product.save()
 
+            # Make a copy BEFORE deleting
+            cart_items_copy = list(cart_items)
             # Clear the cart
             CartItem.objects.filter(user=current_user).delete()
+            context = {
+                'order_number': order_number,
+                'order_placed': True,
+                'cart_items': cart_items_copy,
+                'total': total,
+                'tax': tax,
+                'grand_total': grand_total,
+            }
 
-            return render(request, 'store/checkout.html', {'order_placed': True, 'order_number': order_number, })
+            return render(request, 'store/checkout.html', context)
+
     else:
         return redirect('checkout')

@@ -170,17 +170,19 @@
               <!-- Totals Section -->
               <dl class="row mb-2">
                 <dt class="col-9 text-end">Total price:</dt>
-                <dd class="col-3 text-end">£{{ total }}</dd>
+                <dd class="col-3 text-end">£{{ total|floatformat:2 }}</dd>
               </dl>
 
               <dl class="row mb-2">
                 <dt class="col-9 text-end">Tax:</dt>
-                <dd class="col-3 text-end">£{{ tax }}</dd>
+                <dd class="col-3 text-end">£{{ tax|floatformat:2 }}</dd>
               </dl>
 
               <dl class="row mb-0">
                 <dt class="col-9 text-end">Grand Total:</dt>
-                <dd class="col-3 text-end fw-bold fs-5">£{{ grand_total }}</dd>
+                <dd class="col-3 text-end fw-bold fs-5">
+                  £{{ grand_total|floatformat:2 }}
+                </dd>
               </dl>
 
               <div>
@@ -222,7 +224,7 @@
     </div>
   </div>
 </div>
-
+<p style="color: red">order_placed = {{ order_placed }}</p>
 {% if order_placed %}
 <script>
   const modal = new bootstrap.Modal(

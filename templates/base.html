@@ -1,5 +1,5 @@
 {% load static %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -45,5 +45,89 @@
 
     <!-- footer -->
     {% include "includes/footer.html" %}
+
+    <div aria-live="polite" aria-atomic="true" class="position-relative">
+      <div class="toast-container position-fixed top-0 end-0 p-3">
+        {% for message in messages %}{% if message.tags == "success" %}
+        <div
+          class="toast text-bg-success border-0 mb-2"
+          role="alert"
+          data-bs-delay="3000"
+          data-bs-autohide="true"
+        >
+          <div class="d-flex align-items-center">
+            <i class="bi bi-check-circle-fill fs-4 me-2"></i>
+            <div class="toast-body">{{ message }}</div>
+            <button
+              type="button"
+              class="btn-close btn-close-white me-2 m-auto"
+              data-bs-dismiss="toast"
+            ></button>
+          </div>
+        </div>
+        {% elif message.tags == "error" or message.tags == "danger" %}
+        <div
+          class="toast text-bg-danger border-0 mb-2"
+          role="alert"
+          data-bs-delay="3000"
+          data-bs-autohide="true"
+        >
+          <div class="d-flex align-items-center">
+            <i class="bi bi-x-circle-fill fs-4 me-2"></i>
+            <div class="toast-body">{{ message }}</div>
+            <button
+              type="button"
+              class="btn-close btn-close-white me-2 m-auto"
+              data-bs-dismiss="toast"
+            ></button>
+          </div>
+        </div>
+        {% elif message.tags == "warning" %}
+        <div
+          class="toast text-bg-warning border-0 mb-2"
+          role="alert"
+          data-bs-delay="3000"
+          data-bs-autohide="true"
+        >
+          <div class="d-flex align-items-center">
+            <i class="bi bi-exclamation-triangle-fill fs-4 me-2"></i>
+            <div class="toast-body">{{ message }}</div>
+            <button
+              type="button"
+              class="btn-close btn-close-white me-2 m-auto"
+              data-bs-dismiss="toast"
+            ></button>
+          </div>
+        </div>
+        {% else %}
+        <div
+          class="toast text-bg-info border-0 mb-2"
+          role="alert"
+          data-bs-delay="3000"
+          data-bs-autohide="true"
+        >
+          <div class="d-flex align-items-center">
+            <i class="bi bi-info-circle-fill fs-4 me-2"></i>
+            <div class="toast-body">{{ message }}</div>
+            <button
+              type="button"
+              class="btn-close btn-close-white me-2 m-auto"
+              data-bs-dismiss="toast"
+            ></button>
+          </div>
+        </div>
+        {% endif %} {% endfor %}
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const toastElList = [].slice.call(document.querySelectorAll(".toast"))
+        toastElList.map(function (toastEl) {
+          const t = new bootstrap.Toast(toastEl)
+          t.show()
+        })
+      })
+    </script>
   </body>
 </html>

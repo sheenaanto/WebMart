@@ -86,6 +86,8 @@ def remove_cart(request, product_id, cart_item_id):
             cart_item.save()
         else:
             cart_item.delete()
+        messages.success(request, "Item removed from your cart")
+
     except:
         pass
     return redirect('storecart')
@@ -133,23 +135,55 @@ def cart(request, total=0, quantity=0, cart_items=None):
     return render(request, 'store/carts.html', context)
 
 
+# def checkout(request, total=0, quantity=0, cart_items=None):
+#     tax = 0
+#     grand_total = 0
+#     try:
+#         if request.user.is_authenticated:
+#             cart_items = CartItem.objects.filter(
+#                 user=request.user, is_active=True)
+#         else:
+#             cart = Cart.objects.get(cart_id=_cart_id(request))
+#             cart_items = CartItem.objects.filter(cart=cart, is_active=True)
+#         for cart_item in cart_items:
+#             total += (cart_item.product.price * cart_item.quantity)
+#             quantity += cart_item.quantity
+#         tax = (2 * total)/100
+#         grand_total = total + tax
+#     except Cart.DoesNotExist:
+#         pass
+#     context = {
+#         'cart_items': cart_items,
+#         'total': total,
+#         'quantity': quantity,
+#         'tax': tax,
+#         'grand_total': grand_total,
+#     }
+#     return render(request, 'store/checkout.html', context)
+
+
 def checkout(request, total=0, quantity=0, cart_items=None):
+    if not request.user.is_authenticated:
+        messages.warning(request, "Please log in to proceed to checkout")
+        return redirect('login')
+
+    # --- your existing checkout logic ---
     tax = 0
     grand_total = 0
+
     try:
-        if request.user.is_authenticated:
-            cart_items = CartItem.objects.filter(
-                user=request.user, is_active=True)
-        else:
-            cart = Cart.objects.get(cart_id=_cart_id(request))
-            cart_items = CartItem.objects.filter(cart=cart, is_active=True)
+        cart_items = CartItem.objects.filter(user=request.user, is_active=True)
+
         for cart_item in cart_items:
-            total += (cart_item.product.price * cart_item.quantity)
+            total += cart_item.product.price * cart_item.quantity
             quantity += cart_item.quantity
-        tax = (2 * total)/100
+
+        tax = (2 * total) / 100
         grand_total = total + tax
+
     except Cart.DoesNotExist:
         pass
+
     context = {
         'cart_items': cart_items,
         'total': total,
@@ -157,4 +191,5 @@ def checkout(request, total=0, quantity=0, cart_items=None):
         'tax': tax,
         'grand_total': grand_total,
     }
+
     return render(request, 'store/checkout.html', context)

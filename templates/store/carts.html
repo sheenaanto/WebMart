@@ -4,166 +4,174 @@
   <div class="container">
     {% if not cart_items %}
     <h2 class="text-center">Your cart is empty.</h2>
-    <br />
-    <div class="text-center">
+    <div class="text-center mt-3">
       <a href="{% url 'store' %}" class="btn btn-primary">Continue Shopping</a>
     </div>
 
     {% else %}
 
-    <div class="row">
+    <div class="row gy-4">
       <!-- CART ITEMS -->
-      <aside class="col-lg-9">
+      <aside class="col-12 col-lg-9">
         <div class="card">
-          <table class="table table-borderless table-shopping-cart">
-            <thead class="text-muted">
-              <tr class="small text-uppercase">
-                <th style="padding-left: 5rem">Items</th>
+          <div class="table-responsive">
+            <!-- makes table scrollable on mobile -->
+            <table
+              class="table table-borderless table-shopping-cart align-middle"
+            >
+              <thead class="text-muted small text-uppercase">
+                <tr>
+                  <th class="ps-4">Items</th>
+                  <th class="text-center" width="160">Quantity</th>
+                  <th class="text-center" width="120">Price</th>
+                  <th width="120"></th>
+                </tr>
+              </thead>
 
-                <th width="175" class="text-center">Quantity</th>
-                <th width="120" class="text-center">Price</th>
-                <th width="200"></th>
-              </tr>
-            </thead>
+              <tbody>
+                {% for cart_item in cart_items %}
+                <tr>
+                  <!-- PRODUCT INFO -->
+                  <td>
+                    <figure class="itemside d-flex align-items-center gap-3">
+                      <div class="aside">
+                        <img
+                          src="{{ cart_item.product.images.url }}"
+                          class="img-sm rounded"
+                        />
+                      </div>
+                      <figcaption class="info">
+                        <a
+                          href="{{ cart_item.product.get_url }}"
+                          class="title text-dark fw-semibold"
+                        >
+                          {{ cart_item.product.product_name }}
+                        </a>
+                        <p class="text-muted small mb-0">
+                          Color: {{ cart_item.variation_set }}<br />
+                          Size: {{ cart_item.variation.category }}
+                        </p>
+                      </figcaption>
+                    </figure>
+                  </td>
 
-            <tbody>
-              {% for cart_item in cart_items %}
-              <tr>
-                <!-- PRODUCT INFO -->
-                <td>
-                  <figure class="itemside align-items-center">
-                    <div class="aside">
-                      <img
-                        src="{{ cart_item.product.images.url }}"
-                        class="img-sm"
-                      />
-                    </div>
-                    <figcaption class="info">
+                  <!-- QUANTITY -->
+                  <td class="text-center">
+                    <div
+                      class="input-group input-group-sm justify-content-center"
+                    >
                       <a
-                        href="{{ cart_item.product.get_url }}"
-                        class="title text-dark"
+                        href="{% url 'remove_cart' cart_item.product.id cart_item.id %}"
+                        class="btn btn-light"
                       >
-                        {{ cart_item.product.product_name }}
+                        <i class="fa fa-minus"></i>
                       </a>
-                      <p class="text-muted small">
-                        Color: {{ cart_item.variation_set }}<br />
-                        Size: {{ cart_item.variation.category }}
-                      </p>
-                    </figcaption>
-                  </figure>
-                </td>
 
-                <!-- QUANTITY -->
-                <td>
-                  <div class="input-group">
-                    <a
-                      href="{% url 'remove_cart' cart_item.product.id cart_item.id %}"
-                      class="btn btn-light"
+                      <input
+                        type="text"
+                        class="form-control text-center"
+                        value="{{ cart_item.quantity }}"
+                        readonly
+                        style="max-width: 50px"
+                      />
+
+                      <a
+                        href="{% url 'add_cart' cart_item.product.id %}"
+                        class="btn btn-light"
+                      >
+                        <i class="fa fa-plus"></i>
+                      </a>
+                    </div>
+                  </td>
+
+                  <!-- PRICE -->
+                  <td class="text-center">
+                    <div class="price-wrap">
+                      <var class="price fw-bold"
+                        >£{{ cart_item.sub_total }}</var
+                      >
+                      <small class="text-muted d-block"
+                        >£{{ cart_item.product.price }} each</small
+                      >
+                    </div>
+                  </td>
+
+                  <!-- REMOVE BUTTON -->
+                  <td class="text-center">
+                    <button
+                      class="btn btn-danger btn-sm"
+                      data-bs-toggle="modal"
+                      data-bs-target="#deleteModal{{ cart_item.id }}"
                     >
-                      <i class="fa fa-minus"></i>
-                    </a>
+                      Remove
+                    </button>
 
-                    <input
-                      type="text"
-                      class="form-control text-center"
-                      value="{{ cart_item.quantity }}"
-                      readonly
-                    />
-
-                    <a
-                      href="{% url 'add_cart' cart_item.product.id %}"
-                      class="btn btn-light"
+                    <!-- MODAL -->
+                    <div
+                      class="modal fade"
+                      id="deleteModal{{ cart_item.id }}"
+                      tabindex="-1"
                     >
-                      <i class="fa fa-plus"></i>
-                    </a>
-                  </div>
-                </td>
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Remove Item</h5>
+                            <button
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                            ></button>
+                          </div>
 
-                <!-- PRICE -->
-                <td class="text-center">
-                  <div class="price-wrap">
-                    <var class="price">£{{ cart_item.sub_total }}</var>
-                    <small class="text-muted"
-                      >£{{ cart_item.product.price }} each</small
-                    >
-                  </div>
-                </td>
+                          <div class="modal-body">
+                            Are you sure you want to remove
+                            <strong>{{ cart_item.product.product_name }}</strong
+                            >?
+                          </div>
 
-                <!-- REMOVE BUTTON -->
-                <td class="text-center">
-                  <button
-                    class="btn btn-danger"
-                    data-bs-toggle="modal"
-                    data-bs-target="#deleteModal{{ cart_item.id }}"
-                  >
-                    Remove
-                  </button>
-
-                  <!-- MODAL -->
-                  <div
-                    class="modal fade"
-                    id="deleteModal{{ cart_item.id }}"
-                    tabindex="-1"
-                  >
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">Remove Item</h5>
-                          <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                          ></button>
-                        </div>
-
-                        <div class="modal-body">
-                          Are you sure you want to remove
-                          <strong>{{ cart_item.product.product_name }}</strong>?
-                        </div>
-
-                        <div class="modal-footer">
-                          <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                          >
-                            Cancel
-                          </button>
-
-                          <a
-                            href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}"
-                            class="btn btn-danger"
-                          >
-                            Yes, remove it
-                          </a>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-secondary"
+                              data-bs-dismiss="modal"
+                            >
+                              Cancel
+                            </button>
+                            <a
+                              href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}"
+                              class="btn btn-danger"
+                            >
+                              Yes, remove it
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
         </div>
       </aside>
 
       <!-- SUMMARY -->
-      <aside class="col-lg-3">
+      <aside class="col-12 col-lg-3">
         <div class="card">
           <div class="card-body">
-            <div class="summary-list">
-              <div class="d-flex justify-content-between mx-4">
+            <div class="summary-list mb-3">
+              <div class="d-flex justify-content-between">
                 <span>Total price:</span>
                 <span>£{{ total|floatformat:2 }}</span>
               </div>
 
-              <div class="d-flex justify-content-between mx-4">
+              <div class="d-flex justify-content-between">
                 <span>Tax:</span>
                 <span>£{{ tax|floatformat:2 }}</span>
               </div>
 
-              <div class="d-flex justify-content-between mx-4">
+              <div class="d-flex justify-content-between">
                 <span>Total:</span>
                 <strong>£{{ grand_total|floatformat:2 }}</strong>
               </div>
@@ -175,13 +183,12 @@
               <img src="{% static 'images/misc/payments.png' %}" height="26" />
             </p>
 
-            <a href="{% url 'checkout' %}" class="btn btn-primary w-100">
-              Checkout
-            </a>
-
-            <a href="{% url 'store' %}" class="btn btn-light w-100 mt-2">
-              Continue Shopping
-            </a>
+            <a href="{% url 'checkout' %}" class="btn btn-primary w-100 mb-2"
+              >Checkout</a
+            >
+            <a href="{% url 'store' %}" class="btn btn-light w-100"
+              >Continue Shopping</a
+            >
           </div>
         </div>
       </aside>

@@ -31,7 +31,8 @@
             <a href="{{ product.get_url }}" class="img-wrap">
               <img
                 src="{{ product.images.url }}"
-                class="card-img-top"
+                class="card-img-top img-fluid"
+                style="object-fit: cover; height: 200px"
                 alt="{{ product.product_name }}"
               />
             </a>

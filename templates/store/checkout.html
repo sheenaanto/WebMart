@@ -184,14 +184,14 @@
                   £{{ grand_total|floatformat:2 }}
                 </dd>
               </dl>
-
-              <div>
+              <br />
+              <div class="text-center">
                 <button type="submit" class="btn btn-primary w-100">
                   Place Order
                 </button>
               </div>
               <br />
-              <div>
+              <div class="text-center">
                 <a
                   href="{% url 'store' %}"
                   class="btn btn-outline-secondary w-100"
@@ -224,7 +224,6 @@
     </div>
   </div>
 </div>
-<p style="color: red">order_placed = {{ order_placed }}</p>
 {% if order_placed %}
 <script>
   const modal = new bootstrap.Modal(

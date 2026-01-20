@@ -1,75 +1,76 @@
 {% extends "base.html" %} {% block content %}
 
 <section class="section-content py-4">
-  <div
-    class="card mx-auto shadow-sm"
-    style="max-width: 520px; margin-top: 40px"
-  >
-    <article class="card-body">
-      <header class="mb-4">
-        <h4 class="card-title mb-0">Sign up</h4>
-      </header>
+  <div class="container">
+    <div class="card mx-auto shadow-sm" style="max-width: 520px">
+      <article class="card-body p-4">
+        <header class="mb-4 text-center">
+          <h4 class="card-title mb-0">Sign up</h4>
+        </header>
 
-      <form method="post" action="{% url 'register' %}">
-        {% csrf_token %}
+        <form method="post" action="{% url 'register' %}">
+          {% csrf_token %}
 
-        <!-- First + Last Name -->
-        <div class="row g-3">
-          <div class="col">
-            <label class="form-label">First name</label>
-            {{ form.first_name }}
+          <!-- First + Last Name -->
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <label class="form-label">First name</label>
+              {{ form.first_name }}
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label">Last name</label>
+              {{ form.last_name }}
+            </div>
           </div>
-          <div class="col">
-            <label class="form-label">Last name</label>
-            {{ form.last_name }}
+
+          <!-- Email -->
+          <div class="mt-3">
+            <label class="form-label">Email</label>
+            {{ form.email }}
           </div>
-        </div>
 
-        <!-- Email -->
-        <div class="mt-3">
-          <label class="form-label">Email</label>
-          {{ form.email }}
-        </div>
-
-        <!-- Phone -->
-        <div class="row g-3 mt-3">
-          <div class="col-md-6">
-            <label class="form-label">Phone number</label>
-            {{ form.phone_number }}
+          <!-- Phone -->
+          <div class="row g-3 mt-3">
+            <div class="col-12 col-md-6">
+              <label class="form-label">Phone number</label>
+              {{ form.phone_number }}
+            </div>
           </div>
-        </div>
 
-        <!-- Passwords -->
-        <div class="row g-3 mt-3">
-          <div class="col-md-6">
-            <label class="form-label">Create password</label>
-            {{ form.password }}
+          <!-- Passwords -->
+          <div class="row g-3 mt-3">
+            <div class="col-12 col-md-6">
+              <label class="form-label">Create password</label>
+              {{ form.password }}
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label">Repeat password</label>
+              {{ form.confirm_password }}
+            </div>
           </div>
-          <div class="col-md-6">
-            <label class="form-label">Repeat password</label>
-            {{ form.confirm_password }}
+
+          <!-- Submit -->
+          <div class="d-flex justify-content-center mt-4">
+            <button type="submit" class="btn btn-primary px-4 w-75 w-md-50">
+              Register
+            </button>
           </div>
-        </div>
 
-        <!-- Submit -->
-        <div class="d-grid mt-4">
-          <button type="submit" class="btn btn-primary w-50 mx-auto px-4">
-            Register
-          </button>
-        </div>
+          <!-- Errors -->
+          <div class="mt-2 text-danger small">
+            {{ form.email.errors }} {{ form.non_field_errors }}
+          </div>
+        </form>
+      </article>
+    </div>
 
-        <!-- Errors -->
-        <div class="mt-2 text-danger small">
-          {{ form.email.errors }} {{ form.non_field_errors }}
-        </div>
-      </form>
-    </article>
+    <p class="text-center mt-4">
+      Have an account?
+      <a href="{% url 'login' %}">Log In</a>
+    </p>
   </div>
-
-  <p class="text-center mt-4">
-    Have an account?
-    <a href="{% url 'login' %}">Log In</a>
-  </p>
 </section>
 
 {% endblock %}

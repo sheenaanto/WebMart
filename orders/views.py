@@ -1,4 +1,4 @@
-from datetime import datetime, date
+from datetime import date
 from django.shortcuts import redirect, render
 
 from carts.models import CartItem

@@ -52,7 +52,7 @@
       </aside>
 
       <!-- MAIN CONTENT -->
-      <main class="col-md-9">
+      <div class="col-md-9">
         <header class="border-bottom mb-4 pb-3">
           <div class="d-flex justify-content-between">
             <span><b>{{ products_count }}</b> Products found</span>
@@ -109,9 +109,8 @@
             <li class="page-item disabled">
               <span class="page-link">Previous</span>
             </li>
-            {% endif %}
-            {% for num in products.paginator.page_range %}
-            {% if num == products.number %}
+            {% endif %} {% for num in products.paginator.page_range %} {% if num
+            == products.number %}
             <li class="page-item active">
               <span class="page-link">{{ num }}</span>
             </li>
@@ -133,7 +132,7 @@
           </ul>
         </nav>
         {% endif %}
-      </main>
+      </div>
     </div>
   </div>
 </section>

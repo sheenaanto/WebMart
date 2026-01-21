@@ -109,8 +109,9 @@
             <li class="page-item disabled">
               <span class="page-link">Previous</span>
             </li>
-            {% endif %} {% for num in products.paginator.page_range %} {% if num
-            == products.number %}
+            {% endif %}
+            {% for num in products.paginator.page_range %}
+              {% if num == products.number %}
             <li class="page-item active">
               <span class="page-link">{{ num }}</span>
             </li>

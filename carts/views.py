@@ -1,5 +1,4 @@
 from django.contrib import messages
-from urllib import request
 from django.shortcuts import get_object_or_404, redirect, render
 
 from carts.models import Cart, CartItem
@@ -62,7 +61,7 @@ def remove_cart(request, product_id, cart_item_id):
             cart_item.delete()
         messages.success(request, "Item removed from your cart")
 
-    except:
+    except CartItem.DoesNotExist:
         pass
     return redirect('storecart')
 

@@ -200,13 +200,6 @@ The following colour palette was used in the project:
 | Light Gray | `#f8f9fa` | rgb(248, 249, 250) | Secondary background         |
 | Dark Gray  | `#212529` | rgb(33, 37, 41)    | Text, overlays (40% opacity) |
 
-**Gradient Variations**
-
-- **Blue Gradient**: `rgba(49, 103, 235, 0.9)` to `rgba(33, 37, 41, 0.4)` - Used for hover effects and interactive elements
-- **Green Gradient**: `rgba(0, 181, 23, 0.9)` to `rgba(33, 37, 41, 0.4)` - Success state gradients
-- **Orange Gradient**: `rgba(255, 144, 23, 0.9)` to `rgba(33, 37, 41, 0.4)` - Warning state gradients
-- **Red Gradient**: Similar pattern with red tones - Error state gradients
-
 **Design Approach**
 
 The color scheme follows a clean, modern e-commerce design with:
@@ -267,6 +260,142 @@ Userstories All user stories can be found here.Issues were posted to the board a
 
 This section provides an overview of the data models used in the project, represented through Entity-Relationship Diagrams (ERDs) for each application.
 
+## Tables Description
+
+### Account
+
+Custom user model for authentication and user management.
+
+- **Primary Key**: id
+- **Unique Fields**: username, email
+- **Purpose**: Stores user account information
+- **Special**: Uses Django's AbstractBaseUser for custom authentication
+
+### Category
+
+Product categorization system.
+
+- **Primary Key**: id
+- **Unique Fields**: category_name, slug
+- **Purpose**: Organizes products into categories
+- **Features**: Includes images via Cloudinary
+
+### Product
+
+Product catalog with inventory management.
+
+- **Primary Key**: id
+- **Unique Fields**: product_name, slug
+- **Foreign Keys**: category_id → Category
+- **Purpose**: Stores product information and inventory
+- **Features**: Price, stock tracking, availability status
+
+### Cart
+
+Shopping cart sessions for anonymous and authenticated users.
+
+- **Primary Key**: id
+- **Purpose**: Maintains shopping session
+- **Features**: Can be associated with cart_id (session) or user_id
+
+### CartItem
+
+Individual items within shopping carts.
+
+- **Primary Key**: id
+- **Foreign Keys**:
+  - user_id → Account (nullable)
+  - product_id → Product
+  - cart_id → Cart (nullable)
+- **Purpose**: Tracks products added to cart with quantities
+- **Features**: Supports both guest and logged-in user carts
+
+### Payment
+
+Payment transaction records.
+
+- **Primary Key**: id
+- **Foreign Keys**: user_id → Account
+- **Purpose**: Stores payment information and status
+- **Features**: Tracks payment method, amount, and status
+
+### Order
+
+Customer order details.
+
+- **Primary Key**: id
+- **Foreign Keys**:
+  - user_id → Account (SET_NULL on delete)
+  - payment_id → Payment (nullable)
+- **Purpose**: Stores order information and shipping details
+- **Status Options**: New, Accepted, Completed, Cancelled
+- **Features**: Complete shipping address, order tracking
+
+### OrderProduct
+
+Junction table linking orders with products.
+
+- **Primary Key**: id
+- **Foreign Keys**:
+  - order_id → Order
+  - payment_id → Payment (nullable)
+  - user_id → Account
+  - product_id → Product
+- **Purpose**: Tracks individual products within orders
+- **Features**: Stores quantity and price at time of purchase
+
+## Relationships
+
+| Relationship           | Type        | Description                         | On Delete |
+| ---------------------- | ----------- | ----------------------------------- | --------- |
+| Account → Order        | One-to-Many | User places multiple orders         | SET_NULL  |
+| Account → Payment      | One-to-Many | User makes multiple payments        | CASCADE   |
+| Account → CartItem     | One-to-Many | User has multiple cart items        | CASCADE   |
+| Account → OrderProduct | One-to-Many | User purchases multiple products    | CASCADE   |
+| Category → Product     | One-to-Many | Category contains multiple products | CASCADE   |
+| Product → CartItem     | One-to-Many | Product in multiple carts           | CASCADE   |
+| Product → OrderProduct | One-to-Many | Product in multiple orders          | CASCADE   |
+| Cart → CartItem        | One-to-Many | Cart contains multiple items        | CASCADE   |
+| Payment → Order        | One-to-Many | Payment for multiple orders         | SET_NULL  |
+| Payment → OrderProduct | One-to-Many | Payment covers multiple products    | SET_NULL  |
+| Order → OrderProduct   | One-to-Many | Order contains multiple products    | CASCADE   |
+
+## Key Constraints
+
+### Unique Constraints
+
+- **Account**: username, email
+- **Category**: category_name, slug
+- **Product**: product_name, slug
+
+### Nullable Foreign Keys
+
+- **CartItem**: user_id, cart_id (supports guest carts)
+- **Order**: payment_id (order can exist before payment)
+- **OrderProduct**: payment_id (order product can exist before payment)
+
+## Data Integrity Notes
+
+1. **User Deletion**: Orders are preserved with SET_NULL to maintain historical records
+2. **Product Deletion**: Cascades to cart items and order products
+3. **Cart System**: Supports both anonymous (cart_id) and authenticated (user_id) shopping
+4. **Order Status**: Controlled by predefined choices for consistency
+5. **Timestamps**: Automatic tracking on most models for audit trail
+6. **Images**: Stored externally via Cloudinary CDN for scalability
+
+## Indexes
+
+Automatically created indexes on:
+
+- Primary keys (all tables)
+- Foreign keys (all relationship fields)
+- Unique fields (usernames, emails, slugs)
+- Django's `auto_now` and `auto_now_add` timestamp fields
+
+## Diagram
+
+![alt text](image-18.png)
+
 ## Data Validation
 
 Django Widget attributes have been used to provide min and max markers for form fields ensuring only values in a certain range can be submitted.
@@ -285,7 +414,7 @@ All pages on the live site were tested with the default list of devices in Chrom
 
 ### Lighthouse
 
-The Lighthouse testing was carried out using a [chrome extension](https://chromewebstore.google.com/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk) .The results are displayed by page below:
+The [Lighthouse](https://chromewebstore.google.com/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk) testing was carried out using a chrome extension .The results are displayed by page below:
 
 <details>
 <summary>Lighthouse results</summary>
@@ -371,8 +500,6 @@ The single CSS file was validated using the W3C Validation Service
 <details>
 <summary>Results</summary>
 
-![alt text](image-9.png)
-
 </details>
 
 ## Libraries and Programs Used
@@ -381,6 +508,8 @@ This section highlights the key libraries, tools, and platforms utilised through
 
 Balsamiq
 Balsamiq was used to wireframe all the pages in the project.
+dbdiagram.io
+dbdiagram.io is a simple online tool that turns text into a visual database diagram.
 Git
 Version control was implemented using Git through the GitHub terminal.
 Github

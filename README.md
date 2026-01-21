@@ -17,7 +17,7 @@ This project was developed as a learning exercise to demonstrate full-stack web 
 - **User Authentication**: User registration, login, and dashboard
 - **Product Catalog**: Browse products by categories with detailed product information
 - **Shopping Cart**: Add/remove items from cart with persistent storage
-- **Order Management**: Place orders and track order history
+- **Order Management**: Place orders and view order history
 - **Responsive Design**: Mobile-friendly interface using Bootstrap 5
 - **Admin Panel**: Django admin interface for managing products, categories, and orders
 - **Toast Notifications**: User feedback with success, error, warning, and info messages
@@ -192,23 +192,6 @@ The following colour palette was used in the project:
 | Green  | `#00b517` | rgb(0, 181, 23)   | Success states, confirmations              |
 | Red    | `#fa3434` | rgb(250, 52, 52)  | Error states, alerts                       |
 
-**Neutral Colors**
-
-| Color      | Hex Code  | RGB                | Usage                        |
-| ---------- | --------- | ------------------ | ---------------------------- |
-| White      | `#ffffff` | rgb(255, 255, 255) | Background, cards            |
-| Light Gray | `#f8f9fa` | rgb(248, 249, 250) | Secondary background         |
-| Dark Gray  | `#212529` | rgb(33, 37, 41)    | Text, overlays (40% opacity) |
-
-**Design Approach**
-
-The color scheme follows a clean, modern e-commerce design with:
-
-- **Blue** as the dominant brand color (professional, trustworthy)
-- **Bright accent colors** for clear visual hierarchy and status indicators
-- **Neutral backgrounds** for readability and content focus
-- **Gradients** for hover effects and interactive elements
-
 ![alt text](image-10.png)
 
 ## Wireframes
@@ -235,7 +218,9 @@ The development process for this project was carefully planned and documented to
 
 ### Project Planning and Documentation Using GitHub
 
-Userstories All user stories can be found here.Issues were posted to the board and moved from "Todo" to "In Progress" to "Done" as they were completed. MoSCoW prioritisation was applied using the labels must-have, should-have, and could-have.
+#### Userstories
+
+All user stories can be found here.Issues were posted to the board and moved from "Todo" to "In Progress" to "Done" as they were completed. MoSCoW prioritisation was applied using the labels must-have, should-have, and could-have.
 [Project Board](https://github.com/users/sheenaanto/projects/17)
 
   <details>
@@ -506,35 +491,45 @@ The single CSS file was validated using the W3C Validation Service
 
 This section highlights the key libraries, tools, and platforms utilised throughout the development of the project. These technologies played an essential role in various aspects of the project, from wireframing and version control to deployment and testing.
 
-Balsamiq
-Balsamiq was used to wireframe all the pages in the project.
-dbdiagram.io
-dbdiagram.io is a simple online tool that turns text into a visual database diagram.
-Git
-Version control was implemented using Git through the GitHub terminal.
-Github
-GitHub was used to store the project after being pushed from Git. The cloud service GitHub Pages was used to deploy the project on the web, while GitHub Projects tracked User Stories, Epics, bugs, and other issues throughout the development.
-VS code
-VS code was used as the primary IDE for development, with ESLint and Flake8 linters configured for JavaScript and Python code validation, respectively.
-Heroku
-Heroku was used for deploying the project.
+- **Balsamiq**: Wireframing tool used to design all project pages
+- **dbdiagram.io**: Online tool for converting text into visual database diagrams
+- **Git**: Version control system implemented via GitHub terminal
+- **GitHub**: Cloud repository for code storage, deployment via GitHub Pages, and project tracking (User Stories, Epics, bugs)
+- **VS Code**: Primary IDE with ESLint and Flake8 linters configured for JavaScript and Python validation
+- **Heroku**: Deployment platform for the live application
 
 ## AI Usage in Development
 
-AI tools, specifically GitHub Copilot, were utilized in the development of this project to enhance productivity and code quality. Below is a summary of how AI assisted in various aspects:
+AI tools, particularly GitHub Copilot, were used throughout the development of this project to improve productivity, support learning, and enhance overall code quality. Below is a summary of how AI contributed across different areas.
 
-Content & Documentation;
+### Learning & Best Practices
 
-Leveraged AI to generate logo,icons, initial drafts for user stories and the README file.
-Problem Solving & Debugging;
+AI also acted as a learning companion by:
 
-AI was used as a tool for fixing errors faced in python code in django .Really helped in debugging issue faced during deployment on heroku.
-Conclusion:
+- Explaining CSS properties and Bootstrap utilities
+- Highlighting accessibility considerations
+- Providing multiple approaches to solve implementation challenges
+- Helping reinforce clean, maintainable coding patterns
+- Speeding up development through predictive "ghost text" suggestions
 
-AI served as a learning tool by:
-Explaining CSS properties and Bootstrap utilities
-Showing accessibility best practices
-Providing multiple solution approaches for implementation challenges
-AI tools like GitHub Copilot served as an efficient coding partner, helping to speed up development, reduce syntax errors, and learn best practices. However, all code was reviewed, tested, and customized to meet the specific needs of this project.
+### Problem Solving & Debugging
 
-## Credits
+AI played a practical role in resolving technical challenges, such as:
+
+- Identifying and fixing Python and Django errors
+- Suggesting improvements to views, models, and template logic
+- Assisting with debugging issues encountered during Heroku deployment
+- Offering alternative solutions when facing implementation roadblocks
+
+### Content & Documentation
+
+AI assisted with several non‑code elements of the project, including:
+
+- Generating logo and icon concepts
+- Creating initial drafts for user stories
+- Helping structure and refine the README file
+- Improving clarity and consistency in written documentation
+
+### Conclusion
+
+AI tools like GitHub Copilot served as an efficient coding partner, helping to accelerate development, reduce syntax errors, and support best‑practice learning. All AI‑generated suggestions were reviewed, tested, and adapted to meet the specific requirements of this project.

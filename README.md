@@ -216,7 +216,7 @@ The color scheme follows a clean, modern e-commerce design with:
 - **Neutral backgrounds** for readability and content focus
 - **Gradients** for hover effects and interactive elements
 
-![alt text](color_pallete.png)
+![alt text](image-10.png)
 
 ## Wireframes
 
@@ -238,11 +238,12 @@ These wireframes illustrate how each page is designed to adapt across various sc
 
 ## Development Process
 
-The development process for this project was carefully planned and documented to ensure efficient progress and transparency. This section outlines how the project was broken down into manageable tasks, tracked, and prioritized using GitHub Issues and Projects. Each sub-section provides a detailed look at the tools and methods used to guide development from initial planning to implementation.
+The development process for this project was carefully planned and documented to ensure efficient progress and transparency.
 
 ### Project Planning and Documentation Using GitHub
 
 Userstories All user stories can be found here.Issues were posted to the board and moved from "Todo" to "In Progress" to "Done" as they were completed. MoSCoW prioritisation was applied using the labels must-have, should-have, and could-have.
+[Project Board](https://github.com/users/sheenaanto/projects/17)
 
   <details>
 <summary>Must have</summary>
@@ -261,8 +262,6 @@ Userstories All user stories can be found here.Issues were posted to the board a
 <summary>Won't have</summary>
 
 </details>
-
-Full [Project Board](https://github.com/users/sheenaanto/projects/17)
 
 ## Data Model
 
@@ -286,7 +285,7 @@ All pages on the live site were tested with the default list of devices in Chrom
 
 ### Lighthouse
 
-The Lighthouse testing was carried out using a chrome extension .The results are displayed by page below:
+The Lighthouse testing was carried out using a [chrome extension](https://chromewebstore.google.com/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk) .The results are displayed by page below:
 
 <details>
 <summary>Lighthouse results</summary>
@@ -297,52 +296,84 @@ The Lighthouse testing was carried out using a chrome extension .The results are
 
 ### Python Validation
 
-All python code is validated by the Flake8 linter (installed in VSCode) and CI Python Linter. The exceptions to this were django migration files, urls and similar files. However, any custom models, views and forms were validated. I have separated this by app:
+All python code is validated by the [Flake8 linter](https://flake8.pycqa.org/en/latest/) (installed in VSCode) and [CI Python Linter](https://pep8ci.herokuapp.com/). The exceptions to this were django migration files, urls and similar files. However, any custom models, views and forms were validated.
 
 <details>
 <summary>webmart</summary>
 views.py
 
+![alt text](image-11.png)
+
 </details>
 <details>
 <summary>store</summary>
 views.py
+
+![alt text](image-12.png)
+
 </details>
 <details>
 <summary>accounts</summary>
 views.py
+
+![alt text](image-13.png)
+
 </details>
 <details>
 <summary>carts</summary>
 views.py
+
+![alt text](image-14.png)
+
 </details>
 <details>
 <summary>orders</summary>
 views.py
+
+![alt text](image-15.png)
+
 </details>
 
 ### JavaScript Validation
 
-All JavaScript code is validated by the ESLint (installed in VSCode) and JS Hinterface.
+All JavaScript code is validated by the [ESLint](https://eslint.org/) (installed in VSCode) and [jshint](https://jshint.com/).
 
 <details>
 <summary>Main templete - base.html</summary>
 Contains global JavaScript that runs on all pages - Bootstrap functionality and toast notifications
+
+![alt text](image-16.png)
+
 </details>
 <details>
 <summary>Checkout page - checkout.html</summary>
 Contains page-specific JavaScript for order success modal display
+
+![alt text](image-17.png)
+
 </details>
 
-HTML Validation
-All HTML was validating using the page source of the deployed project using W3C Markup Validation Service. All pages were clear of all errors/warnings. There was only one page where an additonal factor was noted. This was on the menu page which had an 'info' warning. This was related to the way the Cloudinary image is used in the menu item modal.
+### HTML Validation
 
-Menu Page
-All Other Pages
-CSS Validation
+All HTML was validating using the page source of the deployed project using [W3C Markup Validation Service](https://validator.w3.org/nu/?level=warning&doc=https%3A%2F%2Fwebmart-df0a62d3a5c7.herokuapp.com%2F). All pages were clear of all errors/warnings.
+
+<details>
+<summary>Results</summary>
+
+![alt text](image-9.png)
+
+</details>
+
+### CSS Validation
+
 The single CSS file was validated using the W3C Validation Service
 
-Results
+<details>
+<summary>Results</summary>
+
+![alt text](image-9.png)
+
+</details>
 
 ## Libraries and Programs Used
 
@@ -354,19 +385,27 @@ Git
 Version control was implemented using Git through the GitHub terminal.
 Github
 GitHub was used to store the project after being pushed from Git. The cloud service GitHub Pages was used to deploy the project on the web, while GitHub Projects tracked User Stories, Epics, bugs, and other issues throughout the development.
-Gitpod
-Gitpod was used as the primary IDE for development, with ESLint and Flake8 linters configured for JavaScript and Python code validation, respectively.
+VS code
+VS code was used as the primary IDE for development, with ESLint and Flake8 linters configured for JavaScript and Python code validation, respectively.
 Heroku
 Heroku was used for deploying the project.
-pytest
-Pytest was used for automated testing of the project.
-Canva
-Canva was used to generate the logo for this project
-Photoroom
-Photoroom was used to transfomr images to have a transparent background
-ChatGPT
-ChatGPT was the primary AI tool used to aid development through a variety of areas such as bug-fixing, tests devlopment, introduction to form and model methods, improving accessibility and code maintainability as well as initial planning such as outlining scope and developing Epics and Stories.
-Pexels
-Pexels was used as the primary source of background images used in the project.
+
+## AI Usage in Development
+
+AI tools, specifically GitHub Copilot, were utilized in the development of this project to enhance productivity and code quality. Below is a summary of how AI assisted in various aspects:
+
+Content & Documentation;
+
+Leveraged AI to generate logo,icons, initial drafts for user stories and the README file.
+Problem Solving & Debugging;
+
+AI was used as a tool for fixing errors faced in python code in django .Really helped in debugging issue faced during deployment on heroku.
+Conclusion:
+
+AI served as a learning tool by:
+Explaining CSS properties and Bootstrap utilities
+Showing accessibility best practices
+Providing multiple solution approaches for implementation challenges
+AI tools like GitHub Copilot served as an efficient coding partner, helping to speed up development, reduce syntax errors, and learn best practices. However, all code was reviewed, tested, and customized to meet the specific needs of this project.
 
 ## Credits

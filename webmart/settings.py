@@ -42,6 +42,7 @@ ALLOWED_HOSTS = [
     'localhost'
 ]
 
+X_FRAME_OPTIONS = 'ALLOW-FROM https://ui.responsivelyapp.com/'
 
 # Application definition
 

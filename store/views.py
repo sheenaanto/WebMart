@@ -58,18 +58,18 @@ def product_detail(request, category_slug, product_slug):
     return render(request, 'store/product_detail.html', context)
 
 
-def search(request):
-    if 'keyword' in request.GET:
-        keyword = request.GET['keyword']
-        if keyword:
-            # Q()-combine multiple conditions using OR (|) or AND (&)
-            products = Product.objects.filter(
-                Q(description__icontains=keyword) | Q(product_name__icontains=keyword))
-            products_count = products.count()
-            context = {
-                'products': products,
-                'products_count': products_count,
-            }
-            return render(request, 'store/store.html', context)
-        else:
-            return render(request, 'store/store.html')
+# def search(request):
+#     if 'keyword' in request.GET:
+#         keyword = request.GET['keyword']
+#         if keyword:
+#             # Q()-combine multiple conditions using OR (|) or AND (&)
+#             products = Product.objects.filter(
+#                 Q(description__icontains=keyword) | Q(product_name__icontains=keyword))
+#             products_count = products.count()
+#             context = {
+#                 'products': products,
+#                 'products_count': products_count,
+#             }
+#             return render(request, 'store/store.html', context)
+#         else:
+#             return render(request, 'store/store.html')

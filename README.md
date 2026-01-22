@@ -8,6 +8,15 @@ The live project can be viewed [here](https://webmart-df0a62d3a5c7.herokuapp.com
 
 Table of Contents
 
+- [Purpose of the project](#purpose-of-the-project)
+- [Features](#features)
+- [User Experience](#user-experience)
+- [Development Process](#development-process)
+- [Data Model](#data-model)
+- [Testing](#testing)
+- [Libraries and Programs Used](#libraries-and-programs-used)
+- [AI Usage in Development](#ai-usage-in-development)
+
 ## Purpose of the project
 
 This project was developed as a learning exercise to demonstrate full-stack web development skills using Python with Django and PostgreSQL. It showcases practical implementation of e-commerce functionality including user authentication, product management, shopping cart operations, and order processing with a modern, responsive user interface.
@@ -200,6 +209,24 @@ These wireframes illustrate how each page is designed to adapt across various sc
 
 <details>
 <summary>Desktop</summary>
+Homepage
+
+![alt text](image-19.png)
+
+Product detail page
+
+![alt text](image-20.png)
+
+Cart Page
+![alt text](image-21.png)
+
+Login page
+
+![alt text](image-23.png)
+
+Dashboard
+
+Checkout page
 
 </details>
 
@@ -226,18 +253,43 @@ All user stories can be found here.Issues were posted to the board and moved fro
   <details>
 <summary>Must have</summary>
 
+- [View paginated list of products](https://github.com/sheenaanto/WebMart/issues/1)
+- [Filter products by category](https://github.com/sheenaanto/WebMart/issues/2)
+- [View Product Details](https://github.com/sheenaanto/WebMart/issues/3)
+- [Search Products](https://github.com/sheenaanto/WebMart/issues/4)
+- [Add product to cart](https://github.com/sheenaanto/WebMart/issues/7)
+- [View shopping cart](https://github.com/sheenaanto/WebMart/issues/8)
+- [Increase/decrease cart items](https://github.com/sheenaanto/WebMart/issues/9)
+- [Remove Item from Cart](https://github.com/sheenaanto/WebMart/issues/10)
+- [User Registration](https://github.com/sheenaanto/WebMart/issues/11)
+- [User login](https://github.com/sheenaanto/WebMart/issues/12)
+- [Dashboard](https://github.com/sheenaanto/WebMart/issues/6)
+- [User cart](https://github.com/sheenaanto/WebMart/issues/14)
+- [Checkout Page](https://github.com/sheenaanto/WebMart/issues/5)
+- [User Logout](https://github.com/sheenaanto/WebMart/issues/13)
+- [Messages for action](https://github.com/sheenaanto/WebMart/issues/17)
+
 </details>
 
 <details>
 <summary>Should have</summary>
 
+[Cart Persistence for Logged-in Users](https://github.com/sheenaanto/WebMart/issues/16)  
+[Browse Categories through sidebar](https://github.com/sheenaanto/WebMart/issues/15)
+
 </details>
 <details>
 <summary>Could have</summary>
 
+[Cart item auto‑added on login](https://github.com/sheenaanto/WebMart/issues/18)
+
 </details>
 <details>
 <summary>Won't have</summary>
+
+[Payment](https://github.com/sheenaanto/WebMart/issues/19)
+[Returns and reorder](https://github.com/sheenaanto/WebMart/issues/20https://github.com/sheenaanto/WebMart/issues/20)
+[Product Reviews](https://github.com/sheenaanto/WebMart/issues/21)
 
 </details>
 

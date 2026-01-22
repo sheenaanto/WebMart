@@ -39,7 +39,7 @@ The following pages are visible to all users, logged in or not.
 
 <summary>Homepage (landing page)</summary>
 
-![alt text](image.png)
+![alt text](docs/images/image.png)
 
 #### Key Features
 
@@ -58,7 +58,7 @@ The landing page offers users different options:
 <details>
 <summary>Store page</summary>
 
-![alt text](image-2.png)
+![alt text](docs/images/image-2.png)
 
 #### Key Features
 
@@ -75,7 +75,7 @@ Different options available are :
 <details>
 <summary>Products details page</summary>
 
-![alt text](image-3.png)
+![alt text](docs/images/image-3.png)
 
 #### Key Features
 
@@ -93,7 +93,7 @@ Different options available are :
 <details>
 <summary>Carts page</summary>
 
-![alt text](image-4.png)
+![alt text](docs/images/image-4.png)
 
 #### Key Features
 
@@ -109,7 +109,7 @@ Different options available are :
 <details>
 <summary>login page</summary>
 
-![alt text](image-5.png)
+![alt text](docs/images/image-5.png)
 
 #### Key Features
 
@@ -122,7 +122,7 @@ Different options available are :
 <details>
 <summary>Register page</summary>
 
-![alt text](image-6.png)
+![alt text](docs/images/image-6.png)
 
 #### Key Features
 
@@ -142,7 +142,7 @@ The following pages are only available to logged in users.
 
 <summary>Dashboard</summary>
 
-![alt text](image-7.png)
+![alt text](docs/images/image-7.png)
 
 #### Key Features
 
@@ -158,7 +158,7 @@ This page shows details on:
 <details>
 <summary>Checkout</summary>
 
-![alt text](image-8.png)
+![alt text](docs/images/image-8.png)
 
 #### Key Features
 
@@ -201,7 +201,7 @@ The following colour palette was used in the project:
 | Green  | `#00b517` | rgb(0, 181, 23)   | Success states, confirmations              |
 | Red    | `#fa3434` | rgb(250, 52, 52)  | Error states, alerts                       |
 
-![alt text](image-10.png)
+![alt text](docs/images/image-10.png)
 
 ## Wireframes
 
@@ -211,18 +211,18 @@ These wireframes illustrate how each page is designed to adapt across various sc
 <summary>Desktop</summary>
 Homepage
 
-![alt text](image-19.png)
+![alt text](docs/images/image-19.png)
 
 Product detail page
 
-![alt text](image-20.png)
+![alt text](docs/images/image-20.png)
 
 Cart Page
-![alt text](image-21.png)
+![alt text](docs/images/image-21.png)
 
 Login page
 
-![alt text](image-23.png)
+![alt text](docs/images/image-23.png)
 
 Dashboard
 
@@ -431,7 +431,7 @@ Automatically created indexes on:
 
 ## Diagram
 
-![alt text](image-18.png)
+![alt text](docs/images/image-18.png)
 
 ## Data Validation
 
@@ -468,35 +468,35 @@ All python code is validated by the [Flake8 linter](https://flake8.pycqa.org/en/
 <summary>webmart</summary>
 views.py
 
-![alt text](image-11.png)
+![alt text](docs/images/image-11.png)
 
 </details>
 <details>
 <summary>store</summary>
 views.py
 
-![alt text](image-12.png)
+![alt text](docs/images/image-12.png)
 
 </details>
 <details>
 <summary>accounts</summary>
 views.py
 
-![alt text](image-13.png)
+![alt text](docs/images/image-13.png)
 
 </details>
 <details>
 <summary>carts</summary>
 views.py
 
-![alt text](image-14.png)
+![alt text](docs/images/image-14.png)
 
 </details>
 <details>
 <summary>orders</summary>
 views.py
 
-![alt text](image-15.png)
+![alt text](docs/images/image-15.png)
 
 </details>
 
@@ -508,14 +508,14 @@ All JavaScript code is validated by the [ESLint](https://eslint.org/) (installed
 <summary>Main templete - base.html</summary>
 Contains global JavaScript that runs on all pages - Bootstrap functionality and toast notifications
 
-![alt text](image-16.png)
+![alt text](docs/images/image-16.png)
 
 </details>
 <details>
 <summary>Checkout page - checkout.html</summary>
 Contains page-specific JavaScript for order success modal display
 
-![alt text](image-17.png)
+![alt text](docs/images/image-17.png)
 
 </details>
 
@@ -526,13 +526,13 @@ All HTML was validating using the page source of the deployed project using [W3C
 <details>
 <summary>Results</summary>
 
-![alt text](image-9.png)
+![alt text](docs/images/image-9.png)
 
 </details>
 
 ### CSS Validation
 
-The single CSS file was validated using the W3C Validation Service
+The single CSS file was validated using the [W3C Validation Service](https://jigsaw.w3.org/css-validator/)
 
 <details>
 <summary>Results</summary>
@@ -585,3 +585,7 @@ AI assisted with several non‑code elements of the project, including:
 ### Conclusion
 
 AI tools like GitHub Copilot served as an efficient coding partner, helping to accelerate development, reduce syntax errors, and support best‑practice learning. All AI‑generated suggestions were reviewed, tested, and adapted to meet the specific requirements of this project.
+
+## Deployment
+
+The site was deployed to Heroku from the main branch of the repository early in the development stage for continuous deployment and checking.

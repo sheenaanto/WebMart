@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from django.contrib.messages import constants as messages
-import os
-from pathlib import Path
 import dj_database_url
+from pathlib import Path
+import os
+import cloudinary
+cloudinary.config(secure=True)
 
 
 if os.path.isfile("env.py"):
@@ -21,6 +23,12 @@ if os.path.isfile("env.py"):
     DEBUG = True
 else:
     DEBUG = False
+
+
+if not DEBUG:
+    cloudinary.config(
+        secure=True,
+    )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

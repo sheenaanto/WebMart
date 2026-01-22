@@ -540,11 +540,12 @@ The single CSS file was validated using the [W3C Validation Service](https://jig
 ![alt text](docs/images/image-24.png)
 
 The Inter font stylesheet uses:
+
 @font-feature-values
 This rule belongs to CSS Fonts Module Level 4, which browsers support but the W3C CSS Validator does not.
 The validator only checks CSS Level 3 + SVG, so anything newer is labeled “Unrecognized”.
 
-<details>
+</details>
 <summary>Info from Copilot</summary>
 
 ![alt text](docs/images/image-25.png)

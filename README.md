@@ -10,16 +10,37 @@ Table of Contents
 
 - [Purpose of the project](#purpose-of-the-project)
 - [Features](#features)
+  - [All Users](#all-users)
+  - [Authenticated (Logged in) Users](#authenticated-logged-in-users)
 - [User Experience](#user-experience)
+  - [Design](#design)
+  - [Wireframes](#wireframes)
 - [Development Process](#development-process)
+  - [Project Planning and Documentation Using GitHub](#project-planning-and-documentation-using-github)
 - [Data Model](#data-model)
+  - [Models descriptions](#models-descriptions--)
+  - [Relationships](#relationships)
+  - [Key Constraints](#key-constraints)
+  - [Data Integrity Notes](#data-integrity-notes)
+  - [Entity‑Relationship Diagram](#entityrelationship-diagram)
+  - [Data Validation](#data-validation)
 - [Testing](#testing)
+  - [Manual Testing](#manual-testing)
+  - [Validation Testing](#validation-testing)
 - [Libraries and Programs Used](#libraries-and-programs-used)
 - [AI Usage in Development](#ai-usage-in-development)
+- [Deployment](#deployment)
+  - [Deploying to Heroku](#deploying-to-heroku)
+  - [Running in Local Environment](#running-in-local-environment)
+- [Development Note](#development-note)
+
+
 
 ## Purpose of the project
 
 This project was developed as a learning exercise to demonstrate full-stack web development skills using Python with Django and PostgreSQL. It showcases practical implementation of e-commerce functionality including user authentication, product management, shopping cart operations, and order processing with a modern, responsive user interface.
+
+[Return to top](#webmart---e-commerce-store-application)
 
 ## Features
 
@@ -171,6 +192,9 @@ This page offers users different options:
 
 </details>
 
+
+[Return to top](#webmart---e-commerce-store-application)
+
 ## User Experience
 
 This section details the key elements of the user experience (UX) design for the project, including visual design choices, color schemes, typography, and wireframes. It provides insight into the aesthetic and functional decisions made to enhance usability across different devices, ensuring a seamless and accessible experience for users.
@@ -239,6 +263,8 @@ Checkout page
 
 </details>
 
+[Return to top](#webmart---e-commerce-store-application)
+
 ## Development Process
 
 The development process for this project was carefully planned and documented to ensure efficient progress and transparency.
@@ -293,13 +319,15 @@ All user stories can be found here.Issues were posted to the board and moved fro
 
 </details>
 
+[Return to top](#webmart---e-commerce-store-application)
+
 ## Data Model
 
 This section provides an overview of the data models used in the project, represented through Entity-Relationship Diagrams (ERDs) for each application.
 
-## Tables Description
+### Models descriptions -
 
-### Account
+### Account :
 
 Custom user model for authentication and user management.
 
@@ -308,7 +336,7 @@ Custom user model for authentication and user management.
 - **Purpose**: Stores user account information
 - **Special**: Uses Django's AbstractBaseUser for custom authentication
 
-### Category
+### Category :
 
 Product categorization system.
 
@@ -317,7 +345,7 @@ Product categorization system.
 - **Purpose**: Organizes products into categories
 - **Features**: Includes images via Cloudinary
 
-### Product
+### Product :
 
 Product catalog with inventory management.
 
@@ -327,7 +355,7 @@ Product catalog with inventory management.
 - **Purpose**: Stores product information and inventory
 - **Features**: Price, stock tracking, availability status
 
-### Cart
+### Cart :
 
 Shopping cart sessions for anonymous and authenticated users.
 
@@ -335,7 +363,7 @@ Shopping cart sessions for anonymous and authenticated users.
 - **Purpose**: Maintains shopping session
 - **Features**: Can be associated with cart_id (session) or user_id
 
-### CartItem
+### CartItem :
 
 Individual items within shopping carts.
 
@@ -347,7 +375,7 @@ Individual items within shopping carts.
 - **Purpose**: Tracks products added to cart with quantities
 - **Features**: Supports both guest and logged-in user carts
 
-### Payment
+### Payment :
 
 Payment transaction records.
 
@@ -356,7 +384,7 @@ Payment transaction records.
 - **Purpose**: Stores payment information and status
 - **Features**: Tracks payment method, amount, and status
 
-### Order
+### Order :
 
 Customer order details.
 
@@ -368,7 +396,7 @@ Customer order details.
 - **Status Options**: New, Accepted, Completed, Cancelled
 - **Features**: Complete shipping address, order tracking
 
-### OrderProduct
+### OrderProduct :
 
 Junction table linking orders with products.
 
@@ -420,22 +448,25 @@ Junction table linking orders with products.
 5. **Timestamps**: Automatic tracking on most models for audit trail
 6. **Images**: Stored externally via Cloudinary CDN for scalability
 
-## Indexes
-
-Automatically created indexes on:
-
-- Primary keys (all tables)
-- Foreign keys (all relationship fields)
-- Unique fields (usernames, emails, slugs)
-- Django's `auto_now` and `auto_now_add` timestamp fields
-
-## Diagram
+## Entity‑Relationship Diagram.
 
 ![alt text](docs/images/image-18.png)
 
 ## Data Validation
 
-Django Widget attributes have been used to provide min and max markers for form fields ensuring only values in a certain range can be submitted.
+### Custom Form Validation - forms.py
+RegistrationForm with Password Verification:
+
+This custom clean() method:
+
+![alt text](image.png)
+
+- Retrieves cleaned form data
+- Compares password fields
+- Raises ValidationError if they don't match
+- Prevents users from creating accounts with mismatched passwords
+
+[Return to top](#webmart---e-commerce-store-application)
 
 ## Testing
 
@@ -449,12 +480,33 @@ Feature Testing
 
 All pages on the live site were tested with the default list of devices in Chrome Devtools.
 
+<details>
+<summary>Desktop</summary>
+
+![alt text](docs/images/desktop.png)
+
+</details>
+<details>
+<summary>Tablet</summary>
+
+![alt text](docs/images/tablet.png)
+
+</details>
+<details>
+<summary>Mobile</summary>
+
+![alt text](docs/images/mobile.png)
+
+</details>
+
 ### Lighthouse
 
 The [Lighthouse](https://chromewebstore.google.com/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk) testing was carried out using a chrome extension .The results are displayed by page below:
 
 <details>
 <summary>Lighthouse results</summary>
+
+![alt text](docs/images/image-26.png)
 
 </details>
 
@@ -539,18 +591,22 @@ The single CSS file was validated using the [W3C Validation Service](https://jig
 
 ![alt text](docs/images/image-24.png)
 
-The Inter font stylesheet uses:
+### Known Bug :
 
-@font-feature-values
+The W3C CSS validation error shown above are due to the Inter font stylesheet use : @font-feature-values
+
 This rule belongs to CSS Fonts Module Level 4, which browsers support but the W3C CSS Validator does not.
 The validator only checks CSS Level 3 + SVG, so anything newer is labeled “Unrecognized”.
 
-</details>
+<details>
 <summary>Info from Copilot</summary>
 
 ![alt text](docs/images/image-25.png)
 
 </details>
+</details>
+
+[Return to top](#webmart---e-commerce-store-application)
 
 ## Libraries and Programs Used
 
@@ -562,6 +618,8 @@ This section highlights the key libraries, tools, and platforms utilised through
 - **GitHub**: Cloud repository for code storage, deployment via GitHub Pages, and project tracking (User Stories, Epics, bugs)
 - **VS Code**: Primary IDE with ESLint and Flake8 linters configured for JavaScript and Python validation
 - **Heroku**: Deployment platform for the live application
+
+[Return to top](#webmart---e-commerce-store-application)
 
 ## AI Usage in Development
 
@@ -599,8 +657,62 @@ AI assisted with several non‑code elements of the project, including:
 
 AI tools like GitHub Copilot served as an efficient coding partner, helping to accelerate development, reduce syntax errors, and support best‑practice learning. All AI‑generated suggestions were reviewed, tested, and adapted to meet the specific requirements of this project.
 
+[Return to top](#webmart---e-commerce-store-application)
+
 ## Deployment
 
 The site was deployed to Heroku from the main branch of the repository early in the development stage for continuous deployment and checking.
 
-## Bugs
+### Deploying to Heroku
+
+1 . **Login to Heroku** and navigate to the Dashboard.
+
+2 . Click the **New** button.
+
+3 . Choose a **unique app name** and select the region relevant to you.
+
+4 . Go to the **Settings** tab, and click **Reveal Config Vars**. Add the following config variables, if not already present:
+
+- **Django secret key**
+- **Database URL**
+- **Cloudinary API**
+
+5 . In your local repository, add a **Procfile** to the root directory with this content:
+
+web: gunicorn webmart.wsgi
+
+6 . Add your Heroku app URL to the **ALLOWED_HOSTS** list in settings.py.
+
+7 . Set **DEBUG** to False in settings.py, then commit and push your changes to GitHub.
+
+8 . Navigate to the **Deploy** tab in the Dashboard. Under **Deployment Method**, click the **GitHub** icon to connect your Heroku app to your GitHub repository.
+
+- Enter your repository name, click Search, then click **Connect**.
+  9 . Under the **Manual Deploy** section, click **Deploy Branch**. Once deployed, you should see the message **"Your app was successfully deployed"**.
+
+10 . Click **Open App** to open the app in the browser.
+
+### Running in Local Environment
+
+1 . Create a virtual environment in the newly cloned project folder using :
+**python -m venv venv**
+
+2 . Activate the virtual environment :
+**source venv/bin/activate**
+
+3 . Install the project dependencies :
+**pip3 install -r requirements.txt**
+
+4 . Run the server :
+**python manage.py runserver**
+
+
+[Return to top](#webmart---e-commerce-store-application)
+
+
+## Development Note
+
+During development, a configuration file containing environment variables was unintentionally included in a commit. The issue was identified quickly, and immediate corrective action was taken. A new database was created, and all sensitive credentials were securely regenerated and updated. This ensured the system remained protected and followed best‑practice security standards.
+
+
+[Return to top](#webmart---e-commerce-store-application)

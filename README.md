@@ -34,8 +34,6 @@ Table of Contents
   - [Running in Local Environment](#running-in-local-environment)
 - [Development Note](#development-note)
 
-
-
 ## Purpose of the project
 
 This project was developed as a learning exercise to demonstrate full-stack web development skills using Python with Django and PostgreSQL. It showcases practical implementation of e-commerce functionality including user authentication, product management, shopping cart operations, and order processing with a modern, responsive user interface.
@@ -192,7 +190,6 @@ This page offers users different options:
 
 </details>
 
-
 [Return to top](#webmart---e-commerce-store-application)
 
 ## User Experience
@@ -269,7 +266,7 @@ Checkout page
 
 The development process for this project was carefully planned and documented to ensure efficient progress and transparency.
 
-### Project Planning and Documentation Using GitHub
+### Project Planning using GitHub
 
 #### Userstories
 
@@ -455,11 +452,12 @@ Junction table linking orders with products.
 ## Data Validation
 
 ### Custom Form Validation - forms.py
+
 RegistrationForm with Password Verification:
 
 This custom clean() method:
 
-![alt text](image.png)
+![alt text](docs/images/code.png)
 
 - Retrieves cleaned form data
 - Compares password fields
@@ -706,13 +704,10 @@ web: gunicorn webmart.wsgi
 4 . Run the server :
 **python manage.py runserver**
 
-
 [Return to top](#webmart---e-commerce-store-application)
-
 
 ## Development Note
 
 During development, a configuration file containing environment variables was unintentionally included in a commit. The issue was identified quickly, and immediate corrective action was taken. A new database was created, and all sensitive credentials were securely regenerated and updated. This ensured the system remained protected and followed best‑practice security standards.
-
 
 [Return to top](#webmart---e-commerce-store-application)

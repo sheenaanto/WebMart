@@ -537,6 +537,18 @@ The single CSS file was validated using the [W3C Validation Service](https://jig
 <details>
 <summary>Results</summary>
 
+![alt text](docs/images/image-24.png)
+
+The Inter font stylesheet uses:
+@font-feature-values
+This rule belongs to CSS Fonts Module Level 4, which browsers support but the W3C CSS Validator does not.
+The validator only checks CSS Level 3 + SVG, so anything newer is labeled “Unrecognized”.
+
+<details>
+<summary>Info from Copilot</summary>
+
+![alt text](docs/images/image-25.png)
+
 </details>
 
 ## Libraries and Programs Used
@@ -589,3 +601,5 @@ AI tools like GitHub Copilot served as an efficient coding partner, helping to a
 ## Deployment
 
 The site was deployed to Heroku from the main branch of the repository early in the development stage for continuous deployment and checking.
+
+## Bugs

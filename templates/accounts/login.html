@@ -33,7 +33,11 @@
 
           <!-- Submit -->
           <div class="d-flex justify-content-center mt-3">
-            <button type="submit" class="btn btn-primary w-75 w-md-50">
+            <button
+              type="submit"
+              class="btn btn-primary w-75 w-md-50"
+              aria-label="Login"
+            >
               Login
             </button>
           </div>
@@ -43,7 +47,7 @@
 
     <p class="text-center mt-4">
       Don't have an account?
-      <a href="{% url 'register' %}">Sign up</a>
+      <a href="{% url 'register' %}" aria-label="Sign up">Sign up</a>
     </p>
   </div>
 </section>

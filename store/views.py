@@ -12,6 +12,16 @@ from django.db.models import Q
 
 
 def store(request, category_slug=None):
+    """
+    Render the store page with products filtered by category if provided.
+    This view retrieves products from the database that are marked as available.
+    If a category_slug is provided, it filters products by the selected category.
+    Args:
+        request (HttpRequest): The HTTP request object.
+        category_slug (str, optional): The slug of the category to filter products.
+    Returns:
+        HttpResponse: Rendered store.html template with filtered products in context.
+    """
     selected_category = None
     products = None
     if category_slug:
@@ -36,6 +46,13 @@ def store(request, category_slug=None):
 
 
 def product_detail(request, category_slug, product_slug):
+    """
+    Retrieve and display a single product with cart status.
+    Args:
+        request (HttpRequest): The HTTP request object.
+        category_slug (str): The slug of the category the product belongs to.
+        product_slug (str): The slug of the product to retrieve.
+    """
     try:
         # Look inside the related Category object and match its slug.
         single_product = Product.objects.get(
@@ -45,7 +62,8 @@ def product_detail(request, category_slug, product_slug):
                 user=request.user, product=single_product).exists()
         else:
             in_cart = CartItem.objects.filter(
-                cart__cart_id=_cart_id(request), product=single_product).exists()
+                cart__cart_id=_cart_id(request),
+                product=single_product).exists()
 
     except Exception as e:
         raise e
@@ -59,6 +77,14 @@ def product_detail(request, category_slug, product_slug):
 
 
 def search(request):
+    """
+    Search for products based on a keyword.
+    Args:
+        request (HttpRequest): The HTTP request object.
+    Returns:
+        HttpResponse: Rendered store.html template with search results 
+        in context.
+    """
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']
         if keyword:

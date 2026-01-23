@@ -311,7 +311,7 @@ All user stories can be found here.Issues were posted to the board and moved fro
 <summary>Won't have</summary>
 
 [Payment](https://github.com/sheenaanto/WebMart/issues/19)
-[Returns and reorder](https://github.com/sheenaanto/WebMart/issues/20https://github.com/sheenaanto/WebMart/issues/20)
+[Product variations](https://github.com/sheenaanto/WebMart/issues/20https://github.com/sheenaanto/WebMart/issues/20)
 [Product Reviews](https://github.com/sheenaanto/WebMart/issues/21)
 
 </details>
@@ -451,13 +451,24 @@ Junction table linking orders with products.
 
 ## Data Validation
 
+### User registration
+
+- RegistrationForm.clean() enforces matching password and confirm_password; all fields use Django’s required-field validation and widget hints for UX.
+- Account enforces unique on email and username, EmailField validates email format, and max_length caps names/phone. The custom manager requires non-empty email and username.
+
+### Products
+
+- product_name and slug are unique; max_length on text fields; price and stock use IntegerField to enforce numeric input; is_available is a BooleanField.
+
+### Carts
+
+- Business-rule validation keeps cart item quantity from dropping below 1 (item is removed instead), preventing negative quantities.
+
 ### Custom Form Validation - forms.py
 
 RegistrationForm with Password Verification:
 
 This custom clean() method:
-
-![alt text](docs/images/code.png)
 
 - Retrieves cleaned form data
 - Compares password fields
@@ -472,7 +483,26 @@ The Testing section covers various strategies used to ensure the application's f
 
 ### Manual Testing
 
-Feature Testing
+| User Stories                         | Status     |
+| ------------------------------------ | ---------- |
+| View paginated list of products      | ✅ Success |
+| Filter products by category          | ✅ Success |
+| View Product Details                 | ✅ Success |
+| Search Products                      | ✅ Success |
+| Add product to cart                  | ✅ Success |
+| View shopping cart                   | ✅ Success |
+| Increase/decrease cart items         | ✅ Success |
+| Remove Item from Cart                | ✅ Success |
+| User Registration                    | ✅ Success |
+| User login                           | ✅ Success |
+| Dashboard                            | ✅ Success |
+| User cart                            | ✅ Success |
+| Checkout Page                        | ✅ Success |
+| User Logout                          | ✅ Success |
+| Messages for action                  | ✅ Success |
+| Cart Persistence for Logged-in Users | ✅ Success |
+| Browse Categories through sidebar    | ✅ Success |
+| Cart item auto‑added on login        | ✅ Success |
 
 ### Responsiveness
 

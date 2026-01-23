@@ -8,6 +8,13 @@ from store.models import Product
 
 
 def _cart_id(request):
+    """
+    Retrieve the current session's cart ID or create a new one if it doesn't exist.
+    Args:
+        request (HttpRequest): The HTTP request object.
+    Returns:
+        str: The cart ID associated with the current session.
+    """
     cart = request.session.session_key
     if not cart:
         cart = request.session.create()
@@ -15,6 +22,14 @@ def _cart_id(request):
 
 
 def add_cart(request, product_id):
+    """
+    Add a product to the cart or increase its quantity if it already exists.
+    Args:
+        request (HttpRequest): The HTTP request object.
+        product_id (int): The ID of the product to add to the cart.
+    Returns:
+        HttpResponse: Redirects to the store cart page.
+    """
     product = Product.objects.get(id=product_id)
 
     # 1. If user is logged in, we don't use session cart
@@ -44,6 +59,15 @@ def add_cart(request, product_id):
 
 
 def remove_cart(request, product_id, cart_item_id):
+    """
+    Remove a product from the cart or decrease its quantity.
+    Args:
+        request (HttpRequest): The HTTP request object.
+        product_id (int): The ID of the product to remove from the cart.
+        cart_item_id (int): The ID of the cart item to remove or decrease.
+    Returns:
+        HttpResponse: Redirects to the store cart page.
+    """
     product = get_object_or_404(Product, id=product_id)
 
     try:
@@ -69,6 +93,15 @@ def remove_cart(request, product_id, cart_item_id):
 
 
 def remove_cart_item(request, product_id, cart_item_id):
+    """
+    Remove a product from the cart entirely.
+    Args:
+        request (HttpRequest): The HTTP request object.
+        product_id (int): The ID of the product to remove from the cart.
+        cart_item_id (int): The ID of the cart item to remove.
+    Returns:
+        HttpResponse: Redirects to the store cart page.
+    """
     product = get_object_or_404(Product, id=product_id)
     if request.user.is_authenticated:
         cart_item = CartItem.objects.get(
@@ -78,10 +111,22 @@ def remove_cart_item(request, product_id, cart_item_id):
         cart_item = CartItem.objects.get(
             product=product, cart=cart, id=cart_item_id)
     cart_item.delete()
+    messages.success(request, "Item removed from your cart")
+
     return redirect('storecart')
 
 
 def cart(request, total=0, quantity=0, cart_items=None):
+    """
+    Display the current user's cart with total, quantity, tax, and grand total.
+    Args:
+        request (HttpRequest): The HTTP request object.
+        total (float, optional): The initial total amount. Defaults to 0.
+        quantity (int, optional): The initial quantity of items. Defaults to 0.
+        cart_items (QuerySet, optional): The cart items to display. Defaults to None.
+    Returns:
+        HttpResponse: Rendered carts.html template with cart details in context.
+    """
     tax = 0
     grand_total = 0
     try:
@@ -110,6 +155,18 @@ def cart(request, total=0, quantity=0, cart_items=None):
 
 
 def checkout(request, total=0, quantity=0, cart_items=None):
+    """
+    Display the checkout page with the current user's cart details.
+    Args:
+        request (HttpRequest): The HTTP request object.
+        total (float, optional): The initial total amount. Defaults to 0.
+        quantity (int, optional): The initial quantity of items. Defaults to 0.
+        cart_items (QuerySet, optional): The cart items to display. Defaults 
+        to None.
+    Returns:
+        HttpResponse: Rendered checkout.html template with cart details in 
+        context.
+    """
     if not request.user.is_authenticated:
         messages.warning(request, "Please log in to proceed to checkout")
         return redirect('login')

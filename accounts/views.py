@@ -11,11 +11,34 @@ from orders.models import Order
 
 
 def register(request):
+    """
+    Handle user registration requests.
+    This view processes both GET and POST requests for user registration.
+    On GET requests, it displays an empty registration form.
+    On POST requests, it validates the submitted form data, creates a new user 
+    account with the provided information, and redirects to the login page upon
+    success.
+    Args:
+        request (HttpRequest): The HTTP request object containing method and 
+        POST data.
+    Returns:
+        HttpResponse: Rendered registration form template on GET request or 
+        form validation failure,or redirect to login page on successful 
+        registration.
+    Raises:
+        None
+    Side Effects:
+        - Creates a new Account object in the database on successful form 
+        validation
+        - Displays a success message to the user on successful registration
+    """
+
     if (request.method == 'POST'):
         form = RegistrationForm(request.POST)
         if form.is_valid():  # if form has all the required fields
             # fetching all the fields from the request post
-            # cleaned data gives the validated value instead of raw unvalidated strings
+            # cleaned data gives the validated value instead of raw
+            # unvalidated strings
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
@@ -23,7 +46,8 @@ def register(request):
             password = form.cleaned_data['password']
             username = email.split('@')[0]
             user = Account.objects.create_user(
-                first_name=first_name, last_name=last_name, email=email, username=username, password=password)
+                first_name=first_name, last_name=last_name, email=email,
+                username=username, password=password)
             user.phone_number = phone_number
             user.save()
             messages.success(
@@ -37,6 +61,22 @@ def register(request):
 
 
 def login(request):
+    """
+    Handles user login functionality.
+    This view function processes login requests. If the request method is 
+    POST, it attempts to authenticate the user using the provided email 
+    and password. If authentication is successful, it checks for an existing
+    guest cart and merges its items with the user's cart. If the user is 
+    successfully logged in, a success message is displayed, and the user 
+    is redirected to the home page. If authentication fails, an error 
+    message is shown, and the user is redirected back to the login page.
+    Args:
+        request: The HTTP request object containing user input.
+    Returns:
+        HttpResponse: A redirect to the home page upon successful login or 
+            a render of the login page with error messages upon failure.
+    """
+
     if (request.method == 'POST'):
         email = request.POST['email']
         password = request.POST['password']
@@ -74,6 +114,23 @@ def login(request):
 
 @login_required(login_url='login')
 def logout(request):
+    """
+    Logs out the user and redirects them to the login page.
+
+    This function handles the logout process by calling the 
+    authentication logout method and displaying a success message 
+    to the user. After logging out, the user is redirected to 
+    the login page.
+
+    Parameters:
+        request: The HTTP request object containing metadata about 
+                 the request.
+
+    Returns:
+        HttpResponseRedirect: A redirect to the login page after 
+                              successful logout.
+    """
+
     auth.logout(request)
     messages.success(request, "You have been logged out.")
     return redirect('login')
@@ -81,6 +138,17 @@ def logout(request):
 
 @login_required(login_url='login')
 def dashboard(request):
+    """
+    Display user dashboard with their order history.
+    Args:
+        request: HttpRequest object containing user information.
+    Returns:
+        HttpResponse: Rendered dashboard template with user's orders and order count.
+    Context:
+        - orders: QuerySet of Order objects filtered by current user, ordered by creation date (newest first), only including completed orders.
+        - order_count: Integer count of user's total orders.
+    """
+
     orders = Order.objects.order_by('-created_on').filter(
         user_id=request.user.id, is_ordered=True)
     order_count = orders.count()

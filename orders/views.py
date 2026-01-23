@@ -11,6 +11,15 @@ from .forms import OrderForm
 
 
 def place_order(request, total=0, quantity=0):
+    """
+    Place an order for the current user.
+    Args:
+        request (HttpRequest): The HTTP request object.
+        total (float, optional): The initial total amount. Defaults to 0.
+        quantity (int, optional): The initial quantity of items. Defaults to 0.
+    Returns:
+        HttpResponse: Rendered checkout.html template with order details in context.
+    """
     current_user = request.user
     #  if the cart count is equal to 0, then redirect back to shop
     cart_items = CartItem.objects.filter(user=current_user)

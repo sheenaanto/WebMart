@@ -16,7 +16,7 @@ Table of Contents
   - [Design](#design)
   - [Wireframes](#wireframes)
 - [Development Process](#development-process)
-  - [Project Planning and Documentation Using GitHub](#project-planning-and-documentation-using-github)
+  - [Agile Methodology - Project planning](#agile-methodology---project-planning)
 - [Data Model](#data-model)
   - [Models descriptions](#models-descriptions--)
   - [Relationships](#relationships)
@@ -33,6 +33,7 @@ Table of Contents
   - [Deploying to Heroku](#deploying-to-heroku)
   - [Running in Local Environment](#running-in-local-environment)
 - [Development Note](#development-note)
+- [Credits](#credits)
 
 ## Purpose of the project
 
@@ -230,33 +231,98 @@ These wireframes illustrate how each page is designed to adapt across various sc
 
 <details>
 <summary>Desktop</summary>
+
 Homepage
 
-![alt text](docs/images/image-19.png)
+![alt text](docs/images/image-1w.png)
 
 Product detail page
 
-![alt text](docs/images/image-20.png)
+![alt text](docs/images/image-2w.png)
 
 Cart Page
-![alt text](docs/images/image-21.png)
+![alt text](docs/images/image-3w.png)
 
 Login page
 
-![alt text](docs/images/image-23.png)
+![alt text](docs/images/image-4w.png)
+
+Register
+
+![alt text](docs/images/image-5w.png)
 
 Dashboard
 
+![alt text](docs/images/image-7w.png)
+
 Checkout page
+
+![alt text](docs/images/image-6w.png)
 
 </details>
 
 <details>
 <summary>Tablet</summary>
 
+Homepage
+
+![alt text](docs/images/image-8w.png)
+
+Product detail page
+
+![alt text](docs/images/image-10w.png)
+
+Cart Page
+
+![alt text](docs/images/image-12w.png)
+
+Login
+
+![alt text](docs/images/image-14w.png)
+
+Register
+
+![alt text](docs/images/image-17w.png)
+
+Dashboard
+
+![alt text](docs/images/image-20w.png)
+
+Checkout page
+
+![alt text](docs/images/image-18w.png)
+
 </details>
 <details>
 <summary>Mobile</summary>
+
+Homepage
+
+![alt text](docs/images/image-9w.png)
+
+Product detail page
+
+![alt text](docs/images/image-11w.png)
+
+Cart Page
+
+![alt text](docs/images/image-13w.png)
+
+Login page
+
+![alt text](docs/images/image-15w.png)
+
+Register
+
+![alt text](docs/images/image-16w.png)
+
+Dashboard
+
+![alt text](docs/images/image-21w.png)
+
+Checkout page
+
+![alt text](docs/images/image-19w.png)
 
 </details>
 
@@ -266,7 +332,7 @@ Checkout page
 
 The development process for this project was carefully planned and documented to ensure efficient progress and transparency.
 
-### Project Planning using GitHub
+### Agile Methodology - Project planning
 
 #### Userstories
 
@@ -311,7 +377,9 @@ All user stories can be found here.Issues were posted to the board and moved fro
 <summary>Won't have</summary>
 
 [Payment](https://github.com/sheenaanto/WebMart/issues/19)
-[Product variations](https://github.com/sheenaanto/WebMart/issues/20https://github.com/sheenaanto/WebMart/issues/20)
+
+[Product Variations](https://github.com/sheenaanto/WebMart/issues/20https://github.com/sheenaanto/WebMart/issues/20)
+
 [Product Reviews](https://github.com/sheenaanto/WebMart/issues/21)
 
 </details>
@@ -422,6 +490,8 @@ Junction table linking orders with products.
 | Payment → OrderProduct | One-to-Many | Payment covers multiple products    | SET_NULL  |
 | Order → OrderProduct   | One-to-Many | Order contains multiple products    | CASCADE   |
 
+[Return to top](#webmart---e-commerce-store-application)
+
 ## Key Constraints
 
 ### Unique Constraints
@@ -436,6 +506,8 @@ Junction table linking orders with products.
 - **Order**: payment_id (order can exist before payment)
 - **OrderProduct**: payment_id (order product can exist before payment)
 
+[Return to top](#webmart---e-commerce-store-application)
+
 ## Data Integrity Notes
 
 1. **User Deletion**: Orders are preserved with SET_NULL to maintain historical records
@@ -445,9 +517,13 @@ Junction table linking orders with products.
 5. **Timestamps**: Automatic tracking on most models for audit trail
 6. **Images**: Stored externally via Cloudinary CDN for scalability
 
+[Return to top](#webmart---e-commerce-store-application)
+
 ## Entity‑Relationship Diagram.
 
 ![alt text](docs/images/image-18.png)
+
+[Return to top](#webmart---e-commerce-store-application)
 
 ## Data Validation
 
@@ -537,6 +613,8 @@ The [Lighthouse](https://chromewebstore.google.com/detail/lighthouse/blipmdconlk
 ![alt text](docs/images/image-26.png)
 
 </details>
+
+[Return to top](#webmart---e-commerce-store-application)
 
 ## Validation Testing
 
@@ -720,6 +798,8 @@ web: gunicorn webmart.wsgi
 
 10 . Click **Open App** to open the app in the browser.
 
+[Return to top](#webmart---e-commerce-store-application)
+
 ### Running in Local Environment
 
 1 . Create a virtual environment in the newly cloned project folder using :
@@ -739,5 +819,27 @@ web: gunicorn webmart.wsgi
 ## Development Note
 
 During development, a configuration file containing environment variables was unintentionally included in a commit. The issue was identified quickly, and immediate corrective action was taken. A new database was created, and all sensitive credentials were securely regenerated and updated. This ensured the system remained protected and followed best‑practice security standards.
+
+[Return to top](#webmart---e-commerce-store-application)
+
+## Credits
+
+Below are key reference sources which gave me the confidence for completing this project
+
+[Code Institute LMS](https://codeinstitute.net/)
+
+[Django pagination](https://docs.djangoproject.com/en/6.0/topics/pagination/)
+
+[Django messages framework](https://docs.djangoproject.com/en/6.0/ref/contrib/messages/)
+
+[Django Tutorial](https://www.w3schools.com/django/)
+
+[Python tutorial](https://www.geeksforgeeks.org/python/python-programming-language-tutorial/)
+
+[Codemy.com](https://www.youtube.com/watch?v=u6R4vBa7ZK4)
+
+[Tech With Rathan](https://www.youtube.com/@rathankumar)
+
+[Code with Clinton](https://www.youtube.com/@CodeWithClinton)
 
 [Return to top](#webmart---e-commerce-store-application)
